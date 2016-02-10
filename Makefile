@@ -6,11 +6,14 @@
 #    By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 16:20:10 by aaudiber          #+#    #+#              #
-#    Updated: 2016/02/04 16:22:59 by aaudiber         ###   ########.fr        #
+#    Updated: 2016/02/10 19:50:39 by aaudiber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME = minishell
+
 SRC = ./src/minishell.c\
+	  ./src/get_next_line.c\
 
 OBJ = $(SRC:.c:.o)
 
