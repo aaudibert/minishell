@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/11 18:09:30 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/11 20:35:31 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@
 int			get_next_line(int const fd, char **line);
 char		*get_name(char *s);
 char		**get_param(char **av);
+void		print_prompt(char *prompt);
 #endif
