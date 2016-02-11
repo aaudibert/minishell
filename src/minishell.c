@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/11 20:36:48 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/11 20:39:02 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int		main(int ac, char **av, char **env)
 {
-	char *prompt;
-	char *cmd;
-	char **prm;
+	char 	*prompt;
+	char 	*cmd;
+	char 	**prm;
+	int		ex;
 
+	ex = 1
 	cmd = NULL;
 	prm = NULL;
 	if (ac > 1)
@@ -28,7 +30,7 @@ int		main(int ac, char **av, char **env)
 	prompt = get_name(get_name(env[6]));
 	while (42)
 	{
-		print_prompt(prompt);
+		print_prompt(prompt, ex);
 		get_next_line(0, av);
 	}
 	free(prompt);

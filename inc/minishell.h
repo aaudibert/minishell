@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/11 20:35:31 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/11 20:40:21 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 # define RESET  "\x1B[0m"
 # define RED  "\x1B[31m"
+# define BRED  "\x1B[1;31m"
 # define GREEN  "\x1B[32m"
 # define BGREEN  "\x1B[1;32m"
 # define YELLOW  "\x1B[33m"
@@ -35,5 +36,5 @@
 int			get_next_line(int const fd, char **line);
 char		*get_name(char *s);
 char		**get_param(char **av);
-void		print_prompt(char *prompt);
+void		print_prompt(char *prompt, int ex);
 #endif
