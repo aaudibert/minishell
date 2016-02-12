@@ -1,55 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_name.c                                         :+:      :+:    :+:   */
+/*   ft_setenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/11 16:46:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/12 16:17:39 by aaudiber         ###   ########.fr       */
+/*   Created: 2016/02/12 16:17:50 by aaudiber          #+#    #+#             */
+/*   Updated: 2016/02/12 16:35:11 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char		**get_param(char **av)
+char		**ft_initenv(char **env, int init)
+{
+	int		i;
+	char	**ret;
+
+	i = 0;
+	while (env[i])
+		i++;
+	ret = (char **)malloc(sizeof(char *) * i + 1 + init);
+	while (env[i])
+	{
+		ret[i] = ft_strdup(env[i]);
+		i++;
+	}
+	ret[i] = 0;
+	return (ret);
+}
+char		**ft_setenv(char **env, char *name, char *value, int init)
 {
 	char	**ret;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
-	while (av[i])
+	while (env[i])
 		i++;
-	i = 2;
-	ret = (char**)malloc(sizeof(char *) * i - 1);
-	while (av[i])
+	if (init == 0)
+		return (ft_initenv(env, init));
+	else
 	{
-		ret[j] = av[i];
-		i++;
-		j++;
+		ret = ft_initenv(env, init);
+		ret[i] = ft_strjoin(ft_strjoin(name, "="), value);
+		ret[++i] = 0;
+		return (ret);
 	}
-	return (ret);
-}
-
-char		*get_name(char *s)
-{
-	int		i;
-	int		j;
-	char	*ret;
-
-	i = ft_strlen(s) - 2;
-	j = 0;
-	while (s[i] != '/' && i >= 0)
-		i--;
-	i++;
-	ret = (char *)malloc(sizeof(char) * (ft_strlen(s) - i + 1));
-	while (s[i] != '/' && s[i] != '\0')
-	{
-		ret[j] = s[i];
-		i++;
-		j++;
-	}
-	return (ret);
 }
