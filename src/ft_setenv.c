@@ -6,21 +6,58 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 16:17:50 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/12 16:35:11 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/13 14:49:53 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void		ft_print_env(char **env)
+{
+	int i;
+
+	i = 0;
+	while (env[i])
+	{
+		ft_putendl(env[i]);
+		i++;
+	}
+}
+
+char		**ft_unsetenv(char **env, char *name)
+{
+	int		i;
+	int		j;
+	char	**ret;
+
+	i = 0;
+	j = 0;
+	ret = (char **)malloc(sizeof(char *) * ft_arr_size(env));
+	//nom de la variable qui erase env
+	if (ft_strcmp(name, "") != 0)
+	{
+		while (env[i])
+		{
+			if (ft_strncmp(env[i], name, ft_strlen(name)) != 0)
+			{
+				ret[j] = ft_strdup(env[i]);
+				j++;
+			}
+			i++;
+		}
+	}
+	ft_free_arr(env);
+	ret[j] = 0;
+	return (ret);
+}
 
 char		**ft_initenv(char **env, int init)
 {
 	int		i;
 	char	**ret;
 
+	ret = (char **)malloc(sizeof(char *) * ft_arr_size(env) + 1 + init);
 	i = 0;
-	while (env[i])
-		i++;
-	ret = (char **)malloc(sizeof(char *) * i + 1 + init);
 	while (env[i])
 	{
 		ret[i] = ft_strdup(env[i]);
@@ -29,6 +66,7 @@ char		**ft_initenv(char **env, int init)
 	ret[i] = 0;
 	return (ret);
 }
+
 char		**ft_setenv(char **env, char *name, char *value, int init)
 {
 	char	**ret;
