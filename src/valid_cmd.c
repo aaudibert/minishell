@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 16:04:18 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/13 17:14:31 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/13 21:21:56 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		valid_cmd(t_cpe *cpe)
 	int			i;
 
 	i = 0;
+	//fix split path
 	path = ft_strsplit((const char *)cpe->env, ':');
 	while (path[i])
 	{
