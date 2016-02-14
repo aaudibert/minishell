@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/13 21:11:18 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/14 19:37:30 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,14 @@ typedef struct			s_cpe
 	char				**prm;
 }						t_cpe;
 
+void					print_prompt(char *prompt, int ex);
 int						get_next_line(int const fd, char **line);
 char					*get_name(char *s);
 char					**get_param(char **av);
-void					print_prompt(char *prompt, int ex);
+char					*get_path(char **env);
 char					**ft_setenv(char **env, char *name, char *value, int init);
 char					**ft_initenv(char **env, int init);
 void					ft_print_env(char **env);
-void					free_cpe(t_cpe *cpe);
 int						valid_cmd(t_cpe *cpe);
+void					free_cpe(t_cpe *cpe, int i);
 #endif

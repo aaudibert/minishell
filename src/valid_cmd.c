@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 16:04:18 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/13 21:21:56 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/14 20:06:38 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,18 @@ int		valid_cmd(t_cpe *cpe)
 	DIR			*rep;
 	t_dirent	*fr;
 	int			i;
+	char *tmp;
 
 	i = 0;
-	//fix split path
-	path = ft_strsplit((const char *)cpe->env, ':');
+	tmp = get_path(cpe->env);
+	ft_putendl(tmp);
+	ft_putendl("--------------------------------------------------------------------------------");
+	path = ft_strsplit(/*get_path(cpe->env)*/tmp, ':');
+	print_arr(cpe->env);
+	ft_putendl("--------------------------------------------------------------------------------");
+	print_arr(path);
+	if (!cpe->cmd)
+		return (1);
 	while (path[i])
 	{
 		rep = opendir(path[i]);
@@ -37,6 +45,9 @@ int		valid_cmd(t_cpe *cpe)
 		closedir(rep);
 		i++;
 	}
-	ft_free_arr(path);
+	ft_putendl("eokneroierqjhnierqhlq");
+	if (path)
+		ft_free_arr(path);
+	ft_putendl("eokneroierqjhnierqhlq");
 	return (1);
 }

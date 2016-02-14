@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:46:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/13 21:14:24 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/14 16:35:38 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,29 @@ char		**get_param(char **av)
 		i++;
 		j++;
 	}
+	return (ret);
+}
+
+char		*get_path(char **env)
+{
+	int		p;
+	int		i;
+	int		j;
+	char	*ret;
+
+	p = 0;
+	i = 5;
+	j = 0;
+	while (ft_strncmp(env[p], "PATH", 4) != 0)
+		p++;
+	ret = (char *)malloc(sizeof(char) * ft_strlen(env[p] - 5));
+	while (env[p][j] != '\0')
+	{
+		ret[j] = env[p][i];
+		i++;
+		j++;
+	}
+	ret[j] = '\0';
 	return (ret);
 }
 

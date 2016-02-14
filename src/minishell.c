@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/13 21:17:08 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/14 19:56:40 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ t_cpe		*set_cpe(t_cpe *ret, char *cp)
 	if (av[0])
 		ret->cmd = ft_strdup(av[0]);
 	else
+	{
 		ret->cmd = 0;
+		ret->prm = 0;
+		return (ret);
+	}
 	if (av[1])
 		ret->prm = get_param(av);
 	else
@@ -48,9 +52,9 @@ int			main(int ac, char **av, char **env)
 		get_next_line(0, &line);
 		cpe = set_cpe(cpe, line);
 		ex = valid_cmd(cpe);
-		free_cpe(cpe);
+		free_cpe(cpe, 1);
 	}
 	free(prompt);
-	free(cpe);
+	free_cpe(cpe, 0);
 	return (0);
 }

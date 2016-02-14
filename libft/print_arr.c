@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_struct.c                                      :+:      :+:    :+:   */
+/*   print_arr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/13 18:44:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/14 19:40:50 by aaudiber         ###   ########.fr       */
+/*   Created: 2016/02/14 18:57:48 by aaudiber          #+#    #+#             */
+/*   Updated: 2016/02/14 19:03:47 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "libft.h"
 
-void		free_cpe(t_cpe *cpe, int i)
+void		print_arr(char **array)
 {
-	if (cpe->cmd)
-		free(cpe->cmd);
-	if (cpe->prm)
-		ft_free_arr(cpe->prm);
-	else
-		free(cpe->prm);
-	if (i == 0)
+	int i;
+
+	i = 0;
+	while (array[i])
 	{
-		ft_free_arr(cpe->env);
-		free(cpe);
+		ft_putendl(array[i]);
+		i++;
 	}
 }
