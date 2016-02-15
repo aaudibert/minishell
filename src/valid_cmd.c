@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 16:04:18 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/14 20:06:38 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/15 20:29:23 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,9 @@ int		valid_cmd(t_cpe *cpe)
 	DIR			*rep;
 	t_dirent	*fr;
 	int			i;
-	char *tmp;
 
 	i = 0;
-	tmp = get_path(cpe->env);
-	ft_putendl(tmp);
-	ft_putendl("--------------------------------------------------------------------------------");
-	path = ft_strsplit(/*get_path(cpe->env)*/tmp, ':');
-	print_arr(cpe->env);
-	ft_putendl("--------------------------------------------------------------------------------");
-	print_arr(path);
+	path = ft_strsplit(get_path(cpe->env), ':');
 	if (!cpe->cmd)
 		return (1);
 	while (path[i])
@@ -38,6 +31,7 @@ int		valid_cmd(t_cpe *cpe)
 			if (ft_strcmp(cpe->cmd, fr->d_name) == 0)
 			{
 				cpe->cmd = ft_strjoin(path[i], cpe->cmd);
+				closedir(rep);
 				ft_free_arr(path);
 				return (0);
 			}
