@@ -6,44 +6,13 @@
 /*   By: aaudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/11 19:12:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/15 20:53:29 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/16 17:21:09 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-/*static char		*ft_strgetndup(char **s, char c)
-{
-	int		i;
-	int		j;
-	char	*ret;
-
-	i = 0;
-	j = 0;
-	while ((*s)[i] != c && (*s)[i] != '\0')
-		i++;
-	ft_putnbr(i);
-	ft_putchar('\n');
-	if ((ret = (char*)malloc(sizeof(char) * (i + 1))) == NULL)
-		return (NULL);
-	while (i > 0)
-	{
-		ret[j] = **s;
-		(*s)++;
-		j++;
-		i--;
-	}
-	ret[j] = 0;
-	return (ret);
-}
-
-static void		ft_skipc(const char **s, char c)
-{
-	while (**s == c)
-		(*s)++;
-}
-*/
 static int		ft_word_count(char const *s, char c)
 {
 	int i;
@@ -59,33 +28,27 @@ static int		ft_word_count(char const *s, char c)
 	}
 	return (ret);
 }
-/*
-char			**ft_strsplit(char const *s, char c)
+
+char			*ft_strndup(char const *s, int start, int len)
 {
-	char	**ret;
-	int		wc;
+	char	*ret;
 	int		i;
 
-	if (!s)
-		return (NULL);
 	i = 0;
-	wc = ft_word_count(s, c);
-	if ((ret = (char**)malloc(sizeof(char*) * (wc + 1))) == NULL)
-		return (NULL);
-	while (s != '\0')
+	ret = (char *)malloc(sizeof(char) * len);
+	ret[len] = 0;
+	while (i < len)
 	{
-		ft_skipc(&s, c);
-		if (*s == '\0')
-			break ;
-		ret[i] = ft_strgetndup((char**)&s, c);
+		ret[i] = s[start];
 		i++;
+		start++;
 	}
-	ret[i] = 0;
 	return (ret);
-}*/
-size_t			len_c(char const *s, char c, int start)
+}
+
+int				len_c(char const *s, char c, int start)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	while (s[start] != '\0' && s[start] != c)
@@ -101,25 +64,23 @@ char			**ft_strsplit(char const *s, char c)
 	char	**ret;
 	int		wc;
 	int		i;
-	int		j;
 
 	if (!s)
 		return (NULL);
 	i = 0;
-	j = -1;
 	wc = ft_word_count(s, c);
 	if ((ret = (char**)malloc(sizeof(char*) * (wc + 1))) == NULL)
 		return (NULL);
 	ret[wc] = 0;
+	wc = -1;
 	while (s[i] != '\0')
 	{
 		while (s[i] == c)
 			i++;
 		if (s[i] == '\0')
 			break ;
-		ret[++j] = ft_strsub(s, i, len_c(s, c, i));
+		ret[++wc] = ft_strndup(s, i, len_c(s, c, i));
 		i += len_c(s, c, i);
-		i++;
 	}
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/14 19:56:40 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/16 17:07:35 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,19 @@ int			main(int ac, char **av, char **env)
 	char	*line;
 
 	ex = 0;
-	prompt = (char *)malloc(sizeof(char) * ft_strlen(get_name(env[6])));
-	prompt = get_name(get_name(env[6]));
 	(void)ac;
 	(void)av;
 	cpe = (t_cpe*)malloc(sizeof(t_cpe));
 	cpe->env = ft_initenv(env, 0);
+	prompt = get_cdn(get_name(cpe->env, "PWD", 3));
 	while (42)
 	{
 		print_prompt(prompt, ex);
 		get_next_line(0, &line);
 		cpe = set_cpe(cpe, line);
 		ex = valid_cmd(cpe);
+	//	if (ex == 1)
+	//		ex = ex_cmd(cpe);
 		free_cpe(cpe, 1);
 	}
 	free(prompt);

@@ -6,7 +6,7 @@
 #    By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 16:20:10 by aaudiber          #+#    #+#              #
-#    Updated: 2016/02/13 18:55:36 by aaudiber         ###   ########.fr        #
+#    Updated: 2016/02/16 17:59:02 by aaudiber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC = ./src/minishell.c\
 	  ./src/ft_setenv.c\
 	  ./src/free_struct.c\
 	  ./src/valid_cmd.c\
+	  ./src/ex_cmd.c\
 
 OBJ = $(SRC:.c:.o)
 
