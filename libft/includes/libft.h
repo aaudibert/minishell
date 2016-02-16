@@ -6,7 +6,7 @@
 /*   By: aaudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/07 10:32:44 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/14 19:00:23 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/16 22:18:23 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-int					ft_arr_size(char **a);
+int					arr_size(char **a);
 void				ft_free_arr(char **arr);
 void				print_arr(char **array);
 

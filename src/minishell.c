@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/16 17:07:35 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/16 21:02:51 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int			main(int ac, char **av, char **env)
 		print_prompt(prompt, ex);
 		get_next_line(0, &line);
 		cpe = set_cpe(cpe, line);
-		ex = valid_cmd(cpe);
-	//	if (ex == 1)
-	//		ex = ex_cmd(cpe);
+		ex = valid_cmd(cpe, ft_strsplit(get_name(ENV, "PATH=", 5), ':'));
+		if (ex == 0)
+			ex = ex_cmd(cpe);
 		free_cpe(cpe, 1);
 	}
 	free(prompt);
