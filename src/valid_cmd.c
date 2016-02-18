@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 16:04:18 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/16 21:42:25 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/18 21:00:59 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ int		valid_cmd(t_cpe *cpe, char **path)
 	t_dirent	*fr;
 	int			i;
 
-	i = 0;
-	if (!cpe->cmd)
+	if (!CMD)
 		return (1);
-	while (path[i])
+	i = check_builtins(cpe);
+	if (i >= 0)
+		return (i);
+	while (path[++i])
 	{
 		rep = opendir(path[i]);
 		while (rep == NULL && path[i])
@@ -38,11 +40,10 @@ int		valid_cmd(t_cpe *cpe, char **path)
 			break ;
 		while ((fr = readdir(rep)) != NULL)
 		{
-			if (ft_strcmp(cpe->cmd, fr->d_name) == 0)
+			if (ft_strcmp(CMD, fr->d_name) == 0)
 				return (get_cmd(cpe, path, i, rep));
 		}
 		closedir(rep);
-		i++;
 	}
 	ft_free_arr(path);
 	return (1);

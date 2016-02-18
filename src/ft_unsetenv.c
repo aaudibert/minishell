@@ -6,27 +6,57 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 21:56:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/16 22:23:18 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/18 17:25:26 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-/*
+
+void		ft_unprm(t_cpe *cpe, int u)
+{
+	int		i;
+	int		j;
+	char	**ret;
+
+	i = 0;
+	j = 0;
+	ret = (char **)malloc(sizeof(char *) * arr_size(ENV) - 1);
+	while (ENV[i])
+	{
+		if (i == u)
+			i++;
+		ret[j] = ft_strdup(ENV[i]);
+		i++;
+		j++;
+	}
+	ft_free_arr(ENV);
+	ENV = ret;
+}
+
 int			check_var(t_cpe *cpe)
 {
 	int i;
+	int u;
+	int ret;
 
 	i = 0;
-	while (PRM[i])
+	u = 0;
+	ret = 0;
+	while (PRM[u])
 	{
-		if ()
+		while (ENV[i])
+		{
+			if (ft_strncmp(ENV[i], PRM[u], ft_strlen(PRM[u])) == 0)
+				ret++;
+			i++;
+		}
+		if (i == arr_size(ENV))
+			ft_unprm(cpe, u);
+		i = 0;
+		u++;
 	}
-	return (arr_size(PRM);
+	return (ret);
 }
-*/
-
-//ecrire fct pour verif si prm sont var existantes dans env
-//revoir unset et set
 
 int			ft_unsetenv(t_cpe *cpe)
 {
@@ -36,17 +66,19 @@ int			ft_unsetenv(t_cpe *cpe)
 	char	**ret;
 
 	i = 0;
-	j = 0;
+	j = -1;
 	u = check_var(cpe);
 	ret = (char **)malloc(sizeof(char *) * arr_size(ENV) - u);
-	while (ENV[i])
+	while (PRM[u])
 	{
-		if (ft_strncmp(ENV[i], PRM[u], ft_strlen(PRM[u])) != 0)
+		while (ENV[i])
 		{
-			ret[j] = ft_strdup(ENV[i]);
-			j++;
+			if (ft_strncmp(ENV[i], PRM[u], ft_strlen(PRM[u])) != 0)
+				ret[++j] = ft_strdup(ENV[i]);
+			i++;
 		}
-		i++;
+		i = 0;
+		u++;
 	}
 	ret[j] = 0;
 	ft_free_arr(ENV);

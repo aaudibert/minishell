@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 16:17:50 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/16 22:21:54 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/18 17:27:02 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,31 @@ char		**ft_initenv(char **env, int init)
 	return (ret);
 }
 
-char		**ft_setenv(char **env, char *name, char *value, int init)
+int			ft_setenv(t_cpe *cpe, char *name, char *value)
 {
-	char	**ret;
-	int		i;
+	int i;
 
 	i = 0;
-	while (env[i])
-		i++;
-	if (init == 0)
-		return (ft_initenv(env, init));
-	else
+	while (name[i] != '\0')
 	{
-		ret = ft_initenv(env, init);
-		ret[i] = ft_strjoin(ft_strjoin(name, "="), value);
-		ret[++i] = 0;
-		return (ret);
+		if (name[i] == '=')
+		{
+			ft_putendl("new env name cannot contain '='");
+			return (1);
+		}
+		i++;
 	}
+	i = 0;
+	while (value[i] != '\0')
+	{
+		if (value[i] == '=')
+		{
+			ft_putendl("new env value cannot contain '='");
+			return (1);
+		}
+		i++;
+	}
+	ENV = ft_initenv(ENV, 1);
+	ENV[arr_size(ENV) + 1] = ft_strjoin(ft_strjoin(name, "="), value);
+	return (0);
 }

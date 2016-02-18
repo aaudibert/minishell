@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/16 22:14:01 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/18 20:20:13 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define TCMD			cpe->tcmd
 # define ENV			cpe->env
 # define PRM			cpe->prm
+# define TPRM			cpe->tprm
 
 typedef struct dirent	t_dirent;
 
@@ -47,6 +48,7 @@ typedef struct			s_cpe
 	char				*tcmd;
 	char				**env;
 	char				**prm;
+	char				**tprm;
 }						t_cpe;
 
 void					print_prompt(char *prompt, int ex);
@@ -54,11 +56,13 @@ int						get_next_line(int const fd, char **line);
 char					*get_name(char **env, char *s, int len);
 char					*get_cdn(char *s);
 char					**get_param(char **av);
-char					**ft_setenv(char **env, char *name, char *value, int init);
+char					**get_tparam(char **av);
+int						valid_cmd(t_cpe *cpe, char **path);
+int						check_builtins(t_cpe *cpe);
+int						ex_cmd(t_cpe *cpe);
+int						ft_setenv(t_cpe *cpe, char *name, char *value);
 int						ft_unsetenv(t_cpe *cpe);
 char					**ft_initenv(char **env, int init);
 void					ft_print_env(char **env);
-int						valid_cmd(t_cpe *cpe, char **path);
-int						ex_cmd(t_cpe *cpe);
 void					free_cpe(t_cpe *cpe, int i);
 #endif
