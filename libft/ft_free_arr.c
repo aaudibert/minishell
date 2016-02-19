@@ -6,11 +6,12 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:14:55 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/13 14:17:58 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/19 15:52:10 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stdlib.h"
+#include "libft.h"
 
 void		ft_free_arr(char **arr)
 {

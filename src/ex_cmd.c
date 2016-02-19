@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 16:22:56 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/18 20:35:26 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/19 18:50:02 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,16 @@ int		ex_cmd(t_cpe *cpe)
 {
 	pid_t	father;
 	int		w;
+	int		ret;
 
+	ret = 0;
 	father = fork();
 	if (father > 0)
 		wait(&w);
 	if (father == 0)
 	{
-		if (execve(TCMD, TPRM, ENV))
-			return (0);
-		else
-			return (1);
+		ret = execve(TCMD, TPRM, ENV);
 		exit(0);
 	}
-	return (1);
+	return (ret);
 }
