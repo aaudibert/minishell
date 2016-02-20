@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/18 20:20:13 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/20 18:48:15 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,13 @@
 # define ENV			cpe->env
 # define PRM			cpe->prm
 # define TPRM			cpe->tprm
+# define RET			cpe->ret
 
 typedef struct dirent	t_dirent;
 
 typedef struct			s_cpe
 {
+	int					ret;
 	char				*cmd;
 	char				*tcmd;
 	char				**env;
@@ -60,7 +62,7 @@ char					**get_tparam(char **av);
 int						valid_cmd(t_cpe *cpe, char **path);
 int						check_builtins(t_cpe *cpe);
 int						ex_cmd(t_cpe *cpe);
-int						ft_setenv(t_cpe *cpe, char *name, char *value);
+int						ft_setenv(t_cpe *cpe);
 int						ft_unsetenv(t_cpe *cpe);
 char					**ft_initenv(char **env, int init);
 void					ft_print_env(char **env);

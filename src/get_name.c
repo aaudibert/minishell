@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:46:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/18 20:15:23 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/20 19:42:42 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char		**get_param(char **av)
 	j = 1;
 	while (av[j])
 	{
-		ret[i] = ft_strdup(av[i]);
+		ret[i] = ft_strdup(av[j]);
 		i++;
 		j++;
 	}

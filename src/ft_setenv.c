@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 16:17:50 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/18 17:27:02 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/20 20:51:38 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,28 @@ char		**ft_initenv(char **env, int init)
 	int		i;
 	char	**ret;
 
-	ret = (char **)malloc(sizeof(char *) * arr_size(env) + 1 + init);
+	ret = (char **)malloc(sizeof(char *) * (arr_size(env) + 1 + init));
 	i = 0;
 	while (env[i])
 	{
 		ret[i] = ft_strdup(env[i]);
 		i++;
 	}
-	ret[i] = 0;
+	if (i == 1)
+		ft_free_arr(env);
+	if (init == 0)
+		ret[i] = 0;
 	return (ret);
 }
 
-int			ft_setenv(t_cpe *cpe, char *name, char *value)
+int			err_check(t_cpe *cpe)
 {
 	int i;
 
 	i = 0;
-	while (name[i] != '\0')
+	while (PRM[0][i] != '\0')
 	{
-		if (name[i] == '=')
+		if (PRM[0][i] == '=')
 		{
 			ft_putendl("new env name cannot contain '='");
 			return (1);
@@ -55,16 +58,58 @@ int			ft_setenv(t_cpe *cpe, char *name, char *value)
 		i++;
 	}
 	i = 0;
-	while (value[i] != '\0')
+	if (!PRM[1])
+		return (0);
+	while (PRM[1][i])
 	{
-		if (value[i] == '=')
+		if (PRM[1][i] == '=')
 		{
 			ft_putendl("new env value cannot contain '='");
 			return (1);
 		}
 		i++;
 	}
+	return (0);
+}
+
+int			re_setenv(t_cpe *cpe)
+{
+	int i;
+
+	i = 0;
+	while (ENV[i])
+	{
+		if (ft_strncmp(ENV[i], PRM[0], ft_strlen(PRM[0])) == 0)
+		{
+			if (PRM[1])
+			{
+				free(ENV[i]);
+				ENV[i] = ft_strjoin(ft_strjoin(PRM[0], "="), PRM[1]);
+				return (0);
+			}
+			else
+				return (1);
+		}
+		i++;
+	}
+	return (-1);
+}
+
+int			ft_setenv(t_cpe *cpe)
+{
+	int i;
+
+	i = 0;
+	if (err_check(cpe) == 1)
+		return (1);
+	i = re_setenv(cpe);
+	if (i == 1 || i == 0)
+		return (i);
 	ENV = ft_initenv(ENV, 1);
-	ENV[arr_size(ENV) + 1] = ft_strjoin(ft_strjoin(name, "="), value);
+	if (PRM[1])
+		ENV[arr_size(ENV)] = ft_strjoin(ft_strjoin(PRM[0], "="), PRM[1]);
+	else
+		ENV[arr_size(ENV)] = ft_strjoin(PRM[0], "=");
+	ENV[arr_size(ENV)] = 0;
 	return (0);
 }

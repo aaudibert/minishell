@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 16:22:56 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/19 18:50:02 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/20 20:49:25 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ int		check_builtins(t_cpe *cpe)
 			return (print_arr(ENV) + 10);
 		if (arr_size(PRM) > 2)
 		{
-			ft_putendl("setenv: too many arguments.");
+			ft_putendl("setenv: too many arguments");
+			ft_putendl("usage: setenv [name[value]]");
 			return (11);
 		}
-		return (ft_setenv(cpe, PRM[0], PRM[1]) + 10);
+		return (ft_setenv(cpe) + 10);
 	}
 	else if (ft_strcmp(CMD, "unsetenv") == 0)
 		return (ft_unsetenv(cpe) + 10);
@@ -41,16 +42,14 @@ int		ex_cmd(t_cpe *cpe)
 {
 	pid_t	father;
 	int		w;
-	int		ret;
 
-	ret = 0;
 	father = fork();
 	if (father > 0)
 		wait(&w);
 	if (father == 0)
 	{
-		ret = execve(TCMD, TPRM, ENV);
+		RET = execve(TCMD, TPRM, ENV);
 		exit(0);
 	}
-	return (ret);
+	return (RET);
 }

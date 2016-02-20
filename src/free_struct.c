@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 18:44:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/19 20:25:52 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/20 18:32:22 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,29 @@
 
 void		free_cpe(t_cpe *cpe, int i)
 {
-	ft_putendl("------------");
-	free(CMD);
-	ft_putendl("------------");
+	if (CMD)
+	{
+		free(CMD);
+		CMD = NULL;
+	}
 	if (PRM)
+	{
 		ft_free_arr(PRM);
-	ft_putendl("-----------");
+		PRM = NULL;
+	}
 	if (TCMD)
+	{
 		free(TCMD);
-	ft_putendl("-----------");
+		TCMD = NULL;
+	}
 	if (TPRM)
+	{
 		ft_free_arr(TPRM);
+		TPRM = NULL;
+	}
 	if (i == 0)
-	ft_putendl("-----------");
 	{
 		ft_free_arr(ENV);
 		free(cpe);
 	}
-	ft_putendl("-----------");
 }
