@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 16:04:18 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/20 16:34:42 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/21 17:36:21 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 int		get_cmd(t_cpe *cpe, char **path, int i, DIR *rep)
 {
-	TCMD = ft_strjoin(ft_strjoin(path[i], "/") , CMD);
+	TCMD = ft_strjoin(ft_strjoin(path[i], "/"), CMD);
 	closedir(rep);
-	ft_free_arr(path);
 	return (0);
 }
 
-int		valid_cmd(t_cpe *cpe, char **path)
+int		valid_cmd(t_cpe *cpe)
 {
 	DIR			*rep;
 	t_dirent	*fr;
@@ -31,20 +30,19 @@ int		valid_cmd(t_cpe *cpe, char **path)
 	i = check_builtins(cpe);
 	if (i >= 0)
 		return (i);
-	while (path[++i])
+	while (PATH[++i])
 	{
-		rep = opendir(path[i]);
-		while (rep == NULL && path[i])
-			rep = opendir(path[++i]);
-		if (!path[i])
+		rep = opendir(PATH[i]);
+		while (rep == NULL && PATH[i])
+			rep = opendir(PATH[++i]);
+		if (!PATH[i])
 			break ;
 		while ((fr = readdir(rep)) != NULL)
 		{
 			if (ft_strcmp(CMD, fr->d_name) == 0)
-				return (get_cmd(cpe, path, i, rep));
+				return (get_cmd(cpe, PATH, i, rep));
 		}
 		closedir(rep);
 	}
-	ft_free_arr(path);
 	return (1);
 }

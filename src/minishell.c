@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/20 19:41:21 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/21 17:35:31 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_cpe		*ft_initcpe(char **env)
 	cpe = (t_cpe *)malloc(sizeof(t_cpe));
 	ft_bzero(cpe, sizeof(t_cpe));
 	ENV = ft_initenv(env, 0);
+	PATH = ft_strsplit(get_name(ENV, "PATH=", 5), ':');
 	return (cpe);
 }
 
@@ -52,7 +53,7 @@ int			main(int ac, char **av, char **env)
 		print_prompt(prompt, ac);
 		get_next_line(0, &line);
 		set_cpe(cpe, line);
-		ac = valid_cmd(cpe, ft_strsplit(get_name(ENV, "PATH=", 5), ':'));
+		ac = valid_cmd(cpe);
 		if (ac == 0)
 			ac = ex_cmd(cpe);
 		else if (ac == 10 || ac == 11)

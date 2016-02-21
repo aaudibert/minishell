@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 18:44:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/20 18:32:22 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/21 17:33:48 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		free_cpe(t_cpe *cpe, int i)
 	}
 	if (i == 0)
 	{
+		free(PATH);
 		ft_free_arr(ENV);
 		free(cpe);
 	}

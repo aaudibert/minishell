@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/20 18:48:15 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/21 17:31:10 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define BUFF_SIZE		1
 # define CMD			cpe->cmd
 # define TCMD			cpe->tcmd
+# define PATH			cpe->path
 # define ENV			cpe->env
 # define PRM			cpe->prm
 # define TPRM			cpe->tprm
@@ -48,6 +49,7 @@ typedef struct			s_cpe
 	int					ret;
 	char				*cmd;
 	char				*tcmd;
+	char				**path;
 	char				**env;
 	char				**prm;
 	char				**tprm;
@@ -59,7 +61,7 @@ char					*get_name(char **env, char *s, int len);
 char					*get_cdn(char *s);
 char					**get_param(char **av);
 char					**get_tparam(char **av);
-int						valid_cmd(t_cpe *cpe, char **path);
+int						valid_cmd(t_cpe *cpe);
 int						check_builtins(t_cpe *cpe);
 int						ex_cmd(t_cpe *cpe);
 int						ft_setenv(t_cpe *cpe);
