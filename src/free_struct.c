@@ -6,11 +6,20 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 18:44:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/21 17:33:48 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/22 18:26:36 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void		del_cpe(t_cpe *cpe)
+{
+	if (PATH)
+		free(PATH);
+	if (ENV)
+		ft_free_arr(ENV);
+	free(cpe);
+}
 
 void		free_cpe(t_cpe *cpe, int i)
 {
@@ -35,9 +44,5 @@ void		free_cpe(t_cpe *cpe, int i)
 		TPRM = NULL;
 	}
 	if (i == 0)
-	{
-		free(PATH);
-		ft_free_arr(ENV);
-		free(cpe);
-	}
+		del_cpe(cpe);
 }
