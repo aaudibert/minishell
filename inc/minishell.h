@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/22 18:38:10 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/24 17:06:04 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdio.h>
 # include <dirent.h>
 # include <sys/types.h>
+# include <sys/stat.h>
+# include <signal.h>
 # include <sys/uio.h>
 # include <fcntl.h>
 # include "../libft/includes/libft.h"
@@ -43,6 +45,7 @@
 # define RET			cpe->ret
 
 typedef struct dirent	t_dirent;
+typedef struct stat		t_stat;
 
 typedef struct			s_cpe
 {
@@ -68,5 +71,6 @@ int						ft_setenv(t_cpe *cpe);
 int						ft_unsetenv(t_cpe *cpe);
 char					**ft_initenv(char **env, int init);
 void					ft_print_env(char **env);
+int						ft_chdir(t_cpe *cpe);
 void					free_cpe(t_cpe *cpe, int i);
 #endif

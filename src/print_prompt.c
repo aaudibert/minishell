@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 20:34:08 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/22 18:38:50 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/24 19:26:47 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 
 void		print_prompt(t_cpe *cpe, char *prompt, int ex)
-{	if (ex == -1)
+{
+	if (ex == -1)
 	{
 		ft_putstr(BRED);
 		ft_putstr("->  ");

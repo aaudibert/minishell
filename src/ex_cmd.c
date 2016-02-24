@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 16:22:56 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/20 20:49:25 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/24 15:28:52 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		check_builtins(t_cpe *cpe)
 	if (ft_strcmp(CMD, "exit") == 0)
 		exit(0);
 	if (ft_strcmp(CMD, "cd") == 0)
-		return (/*ft_cd(cpe)*/0);
+		return (ft_chdir(cpe));
 	else if (ft_strcmp(CMD, "env") == 0)
 		return (print_arr(ENV) + 10);
 	else if (ft_strcmp(CMD, "setenv") == 0)
