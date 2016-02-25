@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/24 17:06:04 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/25 22:10:52 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <signal.h>
 # include <sys/uio.h>
 # include <fcntl.h>
+# include <limits.h>
 # include "../libft/includes/libft.h"
 
 # define RESET			"\x1B[0m"
@@ -58,10 +59,10 @@ typedef struct			s_cpe
 	char				**tprm;
 }						t_cpe;
 
-void					print_prompt(t_cpe *cpe, char *prompt, int ex);
+char					*print_prompt(char *prompt, int ex);
 int						get_next_line(int const fd, char **line);
 char					*get_name(char **env, char *s, int len);
-char					*get_cdn(char *s);
+char					*get_cdn(char *s, int m);
 char					**get_param(char **av);
 char					**get_tparam(char **av);
 int						valid_cmd(t_cpe *cpe);
@@ -71,6 +72,7 @@ int						ft_setenv(t_cpe *cpe);
 int						ft_unsetenv(t_cpe *cpe);
 char					**ft_initenv(char **env, int init);
 void					ft_print_env(char **env);
+int						get_env(char **env, char *val);
 int						ft_chdir(t_cpe *cpe);
 void					free_cpe(t_cpe *cpe, int i);
 #endif

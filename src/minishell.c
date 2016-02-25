@@ -6,18 +6,21 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/22 20:24:35 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/25 22:11:47 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void		noenv(t_cpe *cpe)
+void		noenv(void)
 {
 	char	*line;
+	char	*prompt;
+
+	prompt = (char *)malloc(sizeof(char));
 	while (42)
 	{
-		print_prompt(cpe, "minishell", -1);
+		prompt = print_prompt(prompt, 1);
 		get_next_line(0, &line);
 	}
 }
@@ -28,7 +31,7 @@ t_cpe		*ft_initcpe(char **env)
 
 	cpe = (t_cpe *)malloc(sizeof(t_cpe));
 	if (*env == NULL)
-		noenv(cpe);
+		noenv();
 	ft_bzero(cpe, sizeof(t_cpe));
 	ENV = ft_initenv(env, 0);
 	PATH = ft_strsplit(get_name(ENV, "PATH=", 5), ':');
@@ -62,7 +65,7 @@ int			main(int ac, char **av, char **env)
 	cpe = ft_initcpe(env);
 	while (42)
 	{
-		print_prompt(cpe, prompt, ac);
+		prompt = print_prompt(prompt, ac);
 		get_next_line(0, &line);
 		set_cpe(cpe, line);
 		ac = valid_cmd(cpe);

@@ -6,34 +6,34 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 20:34:08 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/24 19:26:47 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/25 22:10:42 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 
-void		print_prompt(t_cpe *cpe, char *prompt, int ex)
+char		*print_prompt(char *prompt, int ex)
 {
-	if (ex == -1)
-	{
-		ft_putstr(BRED);
-		ft_putstr("->  ");
-		ft_putstr(BCYAN);
-		ft_putstr(prompt);
-		ft_putstr(RESET);
-		ft_putchar(' ');
-		return ;
-	}
-	free(prompt);
-	prompt = get_cdn(get_name(ENV, "PWD", 3));
-	if (ex == 0)
-		ft_putstr(BGREEN);
+	char	tmp[PATH_MAX];
+	char	*tmp2;
+
+	getcwd(tmp, PATH_MAX);
+	if (ft_strcmp(tmp, "/nfs/2014/a/aaudiber") == 0)
+		tmp2 = ft_strdup("~");
 	else
-		ft_putstr(BRED);
-	ft_putstr("->  ");
-	ft_putstr(BCYAN);
-	ft_putstr(prompt);
-	ft_putstr(RESET);
+		tmp2 = get_cdn(tmp, 0);
+	if (ft_strcmp(tmp, prompt) != 0)
+	{
+		free(prompt);
+		prompt = ft_strdup(tmp2);
+	}
+	free(tmp2);
+	if (ex == 0)
+		ft_putstr_color("->  ", BGREEN);
+	else
+		ft_putstr_color("->  ", BRED);
+	ft_putstr_color(prompt, BCYAN);
 	ft_putchar(' ');
+	return (prompt);
 }

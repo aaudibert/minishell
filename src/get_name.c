@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:46:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/20 19:42:42 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/02/25 21:57:32 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char		**get_tparam(char **av)
 	return (ret);
 }
 
-char		*get_cdn(char *s)
+char		*get_cdn(char *s, int m)
 {
 	int		i;
 	int		j;
@@ -66,7 +66,8 @@ char		*get_cdn(char *s)
 		j++;
 	}
 	ret[j] = 0;
-	free(s);
+	if (m)
+		free(s);
 	return (ret);
 }
 
