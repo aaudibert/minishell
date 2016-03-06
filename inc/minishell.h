@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/25 22:10:52 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/03/06 19:58:34 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define CMD			cpe->cmd
 # define TCMD			cpe->tcmd
 # define PATH			cpe->path
+# define HOME			cpe->home
 # define ENV			cpe->env
 # define PRM			cpe->prm
 # define TPRM			cpe->tprm
@@ -53,18 +54,20 @@ typedef struct			s_cpe
 	int					ret;
 	char				*cmd;
 	char				*tcmd;
+	char				*home;
 	char				**path;
 	char				**env;
 	char				**prm;
 	char				**tprm;
 }						t_cpe;
 
-char					*print_prompt(char *prompt, int ex);
+char					*print_prompt(char *prompt, int ex, char *home);
 int						get_next_line(int const fd, char **line);
 char					*get_name(char **env, char *s, int len);
 char					*get_cdn(char *s, int m);
 char					**get_param(char **av);
 char					**get_tparam(char **av);
+char					*get_home(char *path);
 int						valid_cmd(t_cpe *cpe);
 int						check_builtins(t_cpe *cpe);
 int						ex_cmd(t_cpe *cpe);

@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 15:28:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/25 21:08:52 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/03/06 18:25:34 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int		ft_chdir(t_cpe *cpe)
 			PRM = (char **)malloc(sizeof(char *) * 1);
 		else
 			free(PRM[0]);
-		PRM[0] = ft_strdup("/nfs/2014/a/aaudiber/");
+		PRM[0] = ft_strdup(HOME);
 	}
 	if (PRM[1])
 	{

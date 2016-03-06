@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/25 22:11:47 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/03/06 19:59:39 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		noenv(void)
 	prompt = (char *)malloc(sizeof(char));
 	while (42)
 	{
-		prompt = print_prompt(prompt, 1);
+		prompt = print_prompt(prompt, 1, NULL);
 		get_next_line(0, &line);
 	}
 }
@@ -28,13 +28,15 @@ void		noenv(void)
 t_cpe		*ft_initcpe(char **env)
 {
 	t_cpe	*cpe;
-
-	cpe = (t_cpe *)malloc(sizeof(t_cpe));
-	if (*env == NULL)
+	char	*tmp;
+	tmp = get_name(env, "PATH=", 5);
+	if (*env == NULL || !tmp)
 		noenv();
+	cpe = (t_cpe *)malloc(sizeof(t_cpe));
 	ft_bzero(cpe, sizeof(t_cpe));
 	ENV = ft_initenv(env, 0);
 	PATH = ft_strsplit(get_name(ENV, "PATH=", 5), ':');
+	HOME = get_home(PATH[0]);
 	return (cpe);
 }
 
@@ -42,6 +44,7 @@ void		set_cpe(t_cpe *cpe, char *cp)
 {
 	char	**av;
 
+	cp = replace_char(cp, '\t', ' ');
 	av = ft_strsplit(cp, ' ');
 	if (av[0])
 	{
@@ -65,7 +68,7 @@ int			main(int ac, char **av, char **env)
 	cpe = ft_initcpe(env);
 	while (42)
 	{
-		prompt = print_prompt(prompt, ac);
+		prompt = print_prompt(prompt, ac, HOME);
 		get_next_line(0, &line);
 		set_cpe(cpe, line);
 		ac = valid_cmd(cpe);

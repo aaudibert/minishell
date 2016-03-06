@@ -6,11 +6,21 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:46:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/25 21:57:32 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/03/06 18:24:27 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+char		*get_home(char *path)
+{
+	size_t	i;
+
+	i = 0;
+	while (path[i] != '.')
+		i++;
+	return (ft_strsub(path, 0, i));
+}
 
 char		**get_param(char **av)
 {
@@ -79,8 +89,14 @@ char		*get_name(char **env, char *s, int len)
 
 	p = 0;
 	i = 0;
-	while (ft_strncmp(env[p], s, len) != 0)
+	while (env[p])
+	{
+		if (ft_strncmp(env[p], s, len) == 0)
+			break ;
 		p++;
+	}
+	if (!env[p])
+		return (NULL);
 	ret = (char *)malloc(sizeof(char) * ft_strlen(env[p] + len) + 1);
 	while (env[p][len] != '\0')
 	{
