@@ -6,11 +6,12 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/06 19:59:39 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/03/07 20:20:51 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
 
 void		noenv(void)
 {
@@ -58,14 +59,15 @@ void		set_cpe(t_cpe *cpe, char *cp)
 
 int			main(int ac, char **av, char **env)
 {
-	char	*prompt;
 	t_cpe	*cpe;
 	char	*line;
+	char	*prompt;
 
 	ac = 0;
 	(void)av;
 	prompt = (char *)malloc(sizeof(char));
 	cpe = ft_initcpe(env);
+	check_sign();
 	while (42)
 	{
 		prompt = print_prompt(prompt, ac, HOME);

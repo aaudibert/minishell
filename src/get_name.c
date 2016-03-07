@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:46:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/06 18:24:27 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/03/07 17:39:26 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char		*get_home(char *path)
 	i = 0;
 	while (path[i] != '.')
 		i++;
-	return (ft_strsub(path, 0, i));
+	return (ft_strsub(path, 0, i - 1));
 }
 
 char		**get_param(char **av)
