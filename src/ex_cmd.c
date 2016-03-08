@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 16:22:56 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/24 15:28:52 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/03/08 20:44:57 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		ex_cmd(t_cpe *cpe)
 	pid_t	father;
 	int		w;
 
+	g_ex = 1;
 	father = fork();
 	if (father > 0)
 		wait(&w);
@@ -51,5 +52,7 @@ int		ex_cmd(t_cpe *cpe)
 		RET = execve(TCMD, TPRM, ENV);
 		exit(0);
 	}
+	if (RET == -1)
+		RET = 1;
 	return (RET);
 }

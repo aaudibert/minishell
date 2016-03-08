@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 16:04:18 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/25 20:49:14 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/03/08 20:32:59 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		valid_cmd(t_cpe *cpe)
 		}
 		closedir(rep);
 	}
+	g_ex = 0;
 	ft_putjoin(CMD, ": Command not found.");
 	return (1);
 }

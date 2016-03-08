@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/07 18:57:33 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/03/08 18:16:38 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@
 # define PRM			cpe->prm
 # define TPRM			cpe->tprm
 # define RET			cpe->ret
+
+extern int				g_ex;
 
 typedef struct dirent	t_dirent;
 typedef struct stat		t_stat;
