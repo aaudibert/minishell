@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/08 20:33:39 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/03/09 20:05:18 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@ void		noenv(void)
 	char	*prompt;
 
 	prompt = (char *)malloc(sizeof(char));
+	check_sign();
 	while (42)
 	{
 		prompt = print_prompt(prompt, 1, NULL);
 		get_next_line(0, &line);
+		if (ft_strncmp(line, "exit", 4) == 0)
+			exit(0);
 	}
 }
 
@@ -31,6 +34,7 @@ t_cpe		*ft_initcpe(char **env)
 {
 	t_cpe	*cpe;
 	char	*tmp;
+
 	tmp = get_name(env, "PATH=", 5);
 	if (*env == NULL || !tmp)
 		noenv();

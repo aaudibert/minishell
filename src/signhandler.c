@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/07 18:56:09 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/08 20:42:22 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/03/09 19:20:20 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	signhandler(int signum)
 			print_prompt(NULL, 1, NULL);
 		g_ex = 0;
 	}
+	else
+		g_ex = 0;
 }
 
 void	check_sign(void)

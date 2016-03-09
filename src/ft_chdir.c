@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 15:28:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/06 18:25:34 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/03/09 18:43:29 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int		new_pwd(t_cpe *cpe)
 
 int		ft_chdir(t_cpe *cpe)
 {
-	if (!PRM || ft_strcmp(PRM[0], "~") == 0)
+	if (!PRM || ft_strcmp(PRM[0], "~") == 0 || ft_strcmp(PRM[0], "$HOME") == 0)
 	{
 		if (!PRM)
 			PRM = (char **)malloc(sizeof(char *) * 1);

@@ -6,12 +6,11 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 20:34:08 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/08 18:06:40 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/03/09 19:49:23 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
 
 char		*print_prompt(char *prompt, int ex, char *home)
 {
