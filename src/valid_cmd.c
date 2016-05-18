@@ -6,11 +6,19 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 16:04:18 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/09 20:17:47 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/18 21:33:05 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void		err_cmd(t_cpe *cpe)
+{
+	if (!TCMD)
+		ft_putjoin(CMD, ": Command not found.");
+	else
+		ft_putjoin(TCMD, ": Command not found.");
+}
 
 int		get_cmd(t_cpe *cpe, char **path, int i, DIR *rep)
 {
@@ -19,14 +27,14 @@ int		get_cmd(t_cpe *cpe, char **path, int i, DIR *rep)
 	return (0);
 }
 
-int		valid_cmd(t_cpe *cpe)
+int		valid_cmd(t_cpe *cpe, int ac)
 {
 	DIR			*rep;
 	t_dirent	*fr;
 	int			i;
 
 	if (!CMD)
-		return (1);
+		return (ac);
 	i = check_builtins(cpe);
 	if (i >= 0)
 		return (i);
@@ -44,6 +52,6 @@ int		valid_cmd(t_cpe *cpe)
 		}
 		closedir(rep);
 	}
-	ft_putjoin(CMD, ": Command not found.");
+	err_cmd(cpe);
 	return (1);
 }

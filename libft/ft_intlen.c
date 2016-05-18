@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_intlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaudiber <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: psaint-j <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/03 11:20:58 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/04/22 17:43:52 by psaint-j         ###   ########.fr       */
+/*   Created: 2016/04/22 18:10:17 by psaint-j          #+#    #+#             */
+/*   Updated: 2016/04/29 15:31:08 by psaint-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void		ft_putstr(char const *str)
+int					ft_intlen(int nbr)
 {
-	int		i;
+	int	len;
 
-	i = 0;
-	if (!str)
-		return ;
-	while (str[i] != '\0')
+	len = 1;
+	if (nbr < 0)
 	{
-		write(1, &str[i], 1);
-		i++;
+		nbr *= -1;
+		len++;
 	}
+	while (nbr > 9)
+	{
+		len++;
+		nbr = nbr / 10;
+	}
+	return (len);
 }

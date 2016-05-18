@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/09 20:05:18 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/18 19:44:48 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_cpe		*ft_initcpe(char **env)
 	return (cpe);
 }
 
-int			set_cpe(t_cpe *cpe, char *cp)
+int			set_cpe(t_cpe *cpe, char *cp, int ac)
 {
 	char	**av;
 
@@ -60,7 +60,7 @@ int			set_cpe(t_cpe *cpe, char *cp)
 		if (av[1])
 			PRM = get_param(av);
 	}
-	return (valid_cmd(cpe));
+	return (valid_cmd(cpe, ac));
 }
 
 int			main(int ac, char **av, char **env)
@@ -78,7 +78,7 @@ int			main(int ac, char **av, char **env)
 	{
 		prompt = print_prompt(prompt, ac, HOME);
 		get_next_line(0, &line);
-		ac = set_cpe(cpe, line);
+		ac = set_cpe(cpe, line, ac);
 		g_ex = 0;
 		if (ac == 0)
 			ac = ex_cmd(cpe);

@@ -6,7 +6,7 @@
 #    By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 16:20:10 by aaudiber          #+#    #+#              #
-#    Updated: 2016/03/07 18:56:59 by aaudiber         ###   ########.fr        #
+#    Updated: 2016/05/04 14:25:20 by aaudiber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,10 +39,12 @@ $(NAME):
 	@/bin/echo "---Done---"
 
 clean:
+	@/bin/echo "-----cleaning-----"
 	@/bin/rm -f $(OBJ)
 	@make clean -C ./libft
 
 fclean:
+	@/bin/echo "-----fcleaning-----"
 	@/bin/rm -f $(NAME)
 	@make fclean -C ./libft
 

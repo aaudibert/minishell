@@ -6,17 +6,51 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 16:22:56 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/09 20:08:07 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/18 21:46:59 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int		check_builtins(t_cpe *cpe)
+void		check_cmd_path(t_cpe *cpe)
 {
-	if (ft_strcmp(CMD, "exit") == 0)
+	char	*tmp;
+	int		i;
+	int		len;
+
+	i = 0;
+	while (PATH[i])
+	{
+		len = ft_strlen(PATH[i]) - 1;
+		if (!ft_strncmp(CMD, PATH[i], len))
+		{
+			tmp = ft_strsub(CMD, len + 2, (ft_strlen(CMD) - len));
+			TCMD = ft_strdup(CMD);
+			free(CMD);
+			CMD = tmp;
+			return ;
+		}
+		i++;
+	}
+}
+
+int			exec_exit(t_cpe *cpe)
+{
+	if (ft_strcmp(CMD, "exit") == 0 && PRM)
+	{
+		ft_putendl("exit: Expression Syntax.");
+		return (11);
+	}
+	else
 		exit(0);
-	if (ft_strcmp(CMD, "cd") == 0)
+}
+
+int			check_builtins(t_cpe *cpe)
+{
+	check_cmd_path(cpe);
+	if (ft_strcmp(CMD, "exit") == 0)
+		return (exec_exit(cpe));
+	else if (ft_strcmp(CMD, "cd") == 0)
 		return (ft_chdir(cpe));
 	else if (ft_strcmp(CMD, "env") == 0)
 		return (print_arr(ENV) + 10);
@@ -38,7 +72,7 @@ int		check_builtins(t_cpe *cpe)
 		return (-1);
 }
 
-int		ex_cmd(t_cpe *cpe)
+int			ex_cmd(t_cpe *cpe)
 {
 	pid_t	father;
 	int		w;
@@ -49,11 +83,9 @@ int		ex_cmd(t_cpe *cpe)
 		wait(&w);
 	if (father == 0)
 	{
-		RET = execve(TCMD, TPRM, ENV);
+		execve(TCMD, TPRM, ENV);
 		exit(0);
 	}
-	if (RET == -1)
-		RET = 1;
 	g_ex = 0;
-	return (RET);
+	return (0);
 }

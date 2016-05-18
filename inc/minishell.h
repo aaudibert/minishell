@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/08 18:16:38 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/18 20:22:44 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/uio.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <errno.h>
 # include "../libft/includes/libft.h"
 
 # define RESET			"\x1B[0m"
@@ -44,7 +45,6 @@
 # define ENV			cpe->env
 # define PRM			cpe->prm
 # define TPRM			cpe->tprm
-# define RET			cpe->ret
 
 extern int				g_ex;
 
@@ -53,7 +53,6 @@ typedef struct stat		t_stat;
 
 typedef struct			s_cpe
 {
-	int					ret;
 	char				*cmd;
 	char				*tcmd;
 	char				*home;
@@ -71,7 +70,7 @@ char					*get_cdn(char *s, int m);
 char					**get_param(char **av);
 char					**get_tparam(char **av);
 char					*get_home(char *path);
-int						valid_cmd(t_cpe *cpe);
+int						valid_cmd(t_cpe *cpe, int ac);
 int						check_builtins(t_cpe *cpe);
 int						ex_cmd(t_cpe *cpe);
 int						ft_setenv(t_cpe *cpe);
