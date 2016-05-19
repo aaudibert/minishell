@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 21:56:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/09 19:49:12 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/19 18:11:26 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ char		**ft_unset(t_cpe *cpe)
 	{
 		while (skip_var(cpe, i))
 			i++;
-		rt[++j] = ft_strdup(ENV[i]);
+		if (ENV[i])
+			rt[++j] = ft_strdup(ENV[i]);
 		i++;
 	}
 	return (rt);

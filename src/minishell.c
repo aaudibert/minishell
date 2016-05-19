@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/18 19:44:48 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/19 19:25:23 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		g_ex;
 
-void		noenv(void)
+char		**noenv(t_cpe *cpe)
 {
-	char	*line;
+/*	char	*line;
 	char	*prompt;
 
 	prompt = (char *)malloc(sizeof(char));
@@ -27,7 +27,10 @@ void		noenv(void)
 		get_next_line(0, &line);
 		if (ft_strncmp(line, "exit", 4) == 0)
 			exit(0);
-	}
+	}*/
+	char	**ret;
+	int		i;
+
 }
 
 t_cpe		*ft_initcpe(char **env)
@@ -36,13 +39,20 @@ t_cpe		*ft_initcpe(char **env)
 	char	*tmp;
 
 	tmp = get_name(env, "PATH=", 5);
-	if (*env == NULL || !tmp)
-		noenv();
 	cpe = (t_cpe *)malloc(sizeof(t_cpe));
 	ft_bzero(cpe, sizeof(t_cpe));
-	ENV = ft_initenv(env, 0);
-	PATH = ft_strsplit(get_name(ENV, "PATH=", 5), ':');
-	HOME = get_home(PATH[0]);
+	if (*env == NULL || !tmp)
+	{
+		ENV = noenv(cpe);
+		PATH = ft_strsplit("/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin", ':');
+	}
+	else
+	{
+		ENV = ft_initenv(env, 0);
+		PATH = ft_strsplit(get_name(env, "PATH=", 5), ':');
+		HOME = get_home(PATH[0]);
+	}
+	free(tmp);
 	return (cpe);
 }
 
@@ -55,10 +65,10 @@ int			set_cpe(t_cpe *cpe, char *cp, int ac)
 	if (av[0])
 	{
 		CMD = ft_strdup(av[0]);
-		TPRM = get_tparam(av);
+		TPRM = get_tparam(av, HOME);
 		PRM = NULL;
 		if (av[1])
-			PRM = get_param(av);
+			PRM = get_param(av, HOME);
 	}
 	return (valid_cmd(cpe, ac));
 }

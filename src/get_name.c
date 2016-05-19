@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:46:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/07 17:39:26 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/19 16:25:09 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char		*get_home(char *path)
 	return (ft_strsub(path, 0, i - 1));
 }
 
-char		**get_param(char **av)
+char		**get_param(char **av, char *home)
 {
 	char	**ret;
 	int		i;
@@ -33,7 +33,10 @@ char		**get_param(char **av)
 	j = 1;
 	while (av[j])
 	{
-		ret[i] = ft_strdup(av[j]);
+		if (ft_strcmp(av[j], "~") != 0)
+			ret[i] = ft_strdup(av[j]);
+		else
+			ret[i] = ft_strdup(home);
 		i++;
 		j++;
 	}
@@ -41,7 +44,7 @@ char		**get_param(char **av)
 	return (ret);
 }
 
-char		**get_tparam(char **av)
+char		**get_tparam(char **av, char *home)
 {
 	char	**ret;
 	int		i;
@@ -50,7 +53,10 @@ char		**get_tparam(char **av)
 	i = 0;
 	while (av[i])
 	{
-		ret[i] = ft_strdup(av[i]);
+		if (ft_strcmp(av[i], "~") != 0)
+			ret[i] = ft_strdup(av[i]);
+		else
+			ret[i] = ft_strdup(home);
 		i++;
 	}
 	ret[i] = 0;
