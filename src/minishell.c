@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/19 19:25:23 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/20 18:52:16 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,17 @@
 
 int		g_ex;
 
-char		**noenv(t_cpe *cpe)
+char		**noenv(void)
 {
-/*	char	*line;
-	char	*prompt;
-
-	prompt = (char *)malloc(sizeof(char));
-	check_sign();
-	while (42)
-	{
-		prompt = print_prompt(prompt, 1, NULL);
-		get_next_line(0, &line);
-		if (ft_strncmp(line, "exit", 4) == 0)
-			exit(0);
-	}*/
 	char	**ret;
-	int		i;
+	char	*pwd;
 
+	ret = (char **)malloc(sizeof(char *) * 3);
+	pwd = (char *)malloc(sizeof(char) * (PATH_MAX + 1));
+	ret[0] = ft_strdup("PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin");
+	ret[1] = ft_strjoin("PWD=", getcwd(pwd, PATH_MAX));
+	ret[2] = 0;
+	return (ret);
 }
 
 t_cpe		*ft_initcpe(char **env)
@@ -43,7 +37,7 @@ t_cpe		*ft_initcpe(char **env)
 	ft_bzero(cpe, sizeof(t_cpe));
 	if (*env == NULL || !tmp)
 	{
-		ENV = noenv(cpe);
+		ENV = noenv();
 		PATH = ft_strsplit("/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin", ':');
 	}
 	else
@@ -59,7 +53,11 @@ t_cpe		*ft_initcpe(char **env)
 int			set_cpe(t_cpe *cpe, char *cp, int ac)
 {
 	char	**av;
+	int		i;
 
+	i = 0;
+	while (ENV[i] && ft_strncmp(ENV[i], "PATH", 4))
+		i++;
 	cp = replace_char(cp, '\t', ' ');
 	av = ft_strsplit(cp, ' ');
 	if (av[0])
@@ -67,6 +65,11 @@ int			set_cpe(t_cpe *cpe, char *cp, int ac)
 		CMD = ft_strdup(av[0]);
 		TPRM = get_tparam(av, HOME);
 		PRM = NULL;
+		if (ENV[i])
+		{
+			free(PATH);
+			PATH = ft_strsplit(get_name(ENV, "PATH=", 5), ':');
+		}
 		if (av[1])
 			PRM = get_param(av, HOME);
 	}

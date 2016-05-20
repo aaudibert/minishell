@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 21:56:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/19 18:11:26 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/20 19:35:22 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int			skip_var(t_cpe *cpe, int i)
 	int j;
 
 	j = 0;
+	if (!ENV[i])
+		return (0);
 	while (PRM[j])
 	{
 		if (ft_strncmp(PRM[j], ENV[i], ft_strlen(PRM[j])) == 0)
@@ -70,6 +72,8 @@ char		**ft_unset(t_cpe *cpe)
 			i++;
 		if (ENV[i])
 			rt[++j] = ft_strdup(ENV[i]);
+		else
+			break ;
 		i++;
 	}
 	return (rt);
@@ -81,9 +85,14 @@ int			ft_unsetenv(t_cpe *cpe)
 
 	if (!PRM || !check_var(cpe))
 		return (1);
-	rt = ft_unset(cpe);
-	rt[arr_size(rt)] = 0;
-	ft_free_arr(ENV);
-	ENV = rt;
+	if (ENV[1])
+	{
+		rt = ft_unset(cpe);
+		rt[arr_size(rt)] = 0;
+		ft_free_arr(ENV);
+		ENV = rt;
+	}
+	else
+		ENV[0] = 0;
 	return (0);
 }
