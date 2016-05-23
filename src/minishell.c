@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/23 20:23:10 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/23 20:26:16 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void		env_ch(t_cpe *cpe, int i, int j)
 	}
 	else
 	{
-		ft_putendl("koviojemvioaem");
 		if (HOME)
 			free(HOME);
+		HOME = NULL;
 	}
 }
 
