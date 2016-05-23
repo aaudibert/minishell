@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/23 20:46:55 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/23 22:40:15 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ char					*get_name(char **env, char *s, int len);
 char					*get_cdn(char *s, int m);
 char					**get_param(char **av, char *home);
 char					**get_tparam(char **av, char *home);
-char					*get_home(char *path);
 int						valid_cmd(t_cpe *cpe, int ac);
 int						check_builtins(t_cpe *cpe);
 int						ex_cmd(t_cpe *cpe);

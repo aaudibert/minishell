@@ -6,20 +6,41 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:46:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/23 19:54:48 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/23 23:02:48 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char		*get_home(char *path)
+char		*ch_home(char *av, char *home)
 {
-	size_t	i;
+	int		i;
+	char	*ret;
+	char	*tmp;
+	char	*tmp2;
 
 	i = 0;
-	while (path[i] != '.')
+	while (av[i])
+	{
+		if (av[i] == '~')
+			break;
 		i++;
-	return (ft_strsub(path, 0, i - 1));
+	}
+	if (av[i])
+	{
+		//Final fix ?
+		tmp = ft_strsub(av, 0, i - 1);
+		tmp2 = ft_strjoin(tmp, home);
+		free(tmp);
+		tmp = ft_strsub(av, i + 1, (ft_strlen(av) - i));
+		ret = ft_strjoin(tmp, tmp2);
+		free(tmp);
+		free(tmp2);
+	}
+	else
+		ret = ft_strdup(av);
+	ft_putendl(ret);
+	return (ret);
 }
 
 char		**get_param(char **av, char *home)
@@ -33,8 +54,9 @@ char		**get_param(char **av, char *home)
 	j = 1;
 	while (av[j])
 	{
-		if (ft_strcmp(av[j], "~") != 0)
-			ret[i] = ft_strdup(av[j]);
+		if (ft_strcmp(av[j], "~") != 0 || (!home && !ft_strcmp(av[j], "~")))
+			ret[i] = ch_home(av[j], home);
+			//ret[i] = ft_strdup(av[j]);
 		else
 			ret[i] = ft_strdup(home);
 		i++;
@@ -53,8 +75,8 @@ char		**get_tparam(char **av, char *home)
 	i = 0;
 	while (av[i])
 	{
-		if (ft_strcmp(av[i], "~") != 0)
-			ret[i] = ft_strdup(av[i]);
+		if (ft_strcmp(av[i], "~") != 0 || (!home && !ft_strcmp(av[i], "~")))
+			ret[i] = ch_home(av[i], home);
 		else
 			ret[i] = ft_strdup(home);
 		i++;

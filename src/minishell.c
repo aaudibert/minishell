@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/23 21:58:32 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/23 22:56:46 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_cpe		*ft_initcpe(char **env)
 	{
 		ENV = noenv();
 		PATH = ft_strsplit(get_name(env, "PATH=", 5), ':');
+		HOME = "$home";
+		OLDPWD = NULL;
 	}
 	else
 	{

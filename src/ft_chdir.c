@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 15:28:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/23 20:35:53 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/23 22:34:44 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ void		home_path(t_cpe *cpe)
 
 int			ft_chdir(t_cpe *cpe)
 {
-	if (HOME != NULL && (!PRM || ft_strcmp(PRM[0], "~") == 0 ||
-				ft_strcmp(PRM[0], "$HOME") == 0))
-		home_path(cpe);
-	else if (!HOME && (!PRM || ft_strcmp(PRM[0], "~") == 0 ||
+	if (!HOME && (!PRM || ft_strcmp(PRM[0], "~") == 0 ||
 				ft_strcmp(PRM[0], "$HOME") == 0))
 	{
 		ft_putendl("No $home variable set");
 		return (1);
 	}
+	else if (HOME != NULL && (!PRM || ft_strcmp(PRM[0], "~") == 0 ||
+				ft_strcmp(PRM[0], "$HOME") == 0))
+		home_path(cpe);
 	if (PRM[1])
 	{
 		ft_putendl("cd: Too many arguments.");
