@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/23 19:27:34 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/23 19:28:53 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/23 22:24:46 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 int		handle_pwd(t_cpe *cpe, int p, int o)
 {
 	char *tmp;
+	char tmp2[PATH_MAX];
 
 	if (ft_strcmp(PRM[0], "-") == 0)
 	{
 		free(PRM[0]);
-		PRM[0] = get_name(ENV, "OLDPWD=", 7);
+		PRM[0] = ft_strdup(OLDPWD);
 		ft_putendl(PRM[0]);
 	}
+	if (OLDPWD)
+		free(OLDPWD);
+	getcwd(tmp2, PATH_MAX);
+	OLDPWD = ft_strdup(tmp2);
 	if (ENV[o] && ENV[p])
 	{
 		tmp = get_name(ENV, "PWD=", 4);
@@ -37,21 +42,19 @@ int		check_pwd(t_cpe *cpe)
 	int i;
 	int j;
 
-	i = 0;
-	while (ENV[i])
+	i = -1;
+	while (ENV[++i])
 	{
 		if (ft_strncmp(ENV[i], "PWD", 3) == 0)
 			break ;
-		i++;
 	}
-	j = 0;
-	while (ENV[j])
+	j = -1;
+	while (ENV[++j])
 	{
 		if (ft_strncmp(ENV[j], "OLDPWD", 6) == 0)
 			break ;
-		j++;
 	}
-	if (ft_strcmp(PRM[0], "-") == 0 && !ENV[j])
+	if (ft_strcmp(PRM[0], "-") == 0 && !ENV[j] && !OLDPWD)
 	{
 		ft_putendl(": No such file or directory.");
 		return (1);

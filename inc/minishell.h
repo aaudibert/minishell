@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/23 19:31:21 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/23 20:46:55 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define CMD			cpe->cmd
 # define TCMD			cpe->tcmd
 # define PATH			cpe->path
+# define OLDPWD			cpe->opwd
 # define HOME			cpe->home
 # define ENV			cpe->env
 # define PRM			cpe->prm
@@ -56,6 +57,7 @@ typedef struct			s_cpe
 	char				*cmd;
 	char				*tcmd;
 	char				*home;
+	char				*opwd;
 	char				**path;
 	char				**env;
 	char				**prm;

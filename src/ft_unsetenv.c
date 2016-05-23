@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 21:56:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/20 19:35:22 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/23 22:25:35 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,14 @@ int			skip_var(t_cpe *cpe, int i)
 	while (PRM[j])
 	{
 		if (ft_strncmp(PRM[j], ENV[i], ft_strlen(PRM[j])) == 0)
+		{
+			if (!ft_strcmp(PRM[j], "OLDPWD"))
+			{
+				free(OLDPWD);
+				OLDPWD = NULL;
+			}
 			return (1);
+		}
 		j++;
 	}
 	return (0);
@@ -59,12 +66,10 @@ char		**ft_unset(t_cpe *cpe)
 {
 	int		i;
 	int		j;
-	int		u;
 	char	**rt;
 
 	i = 0;
 	j = -1;
-	u = 0;
 	rt = (char **)malloc(sizeof(char *) * (arr_size(ENV) - check_var(cpe) + 1));
 	while (ENV[i])
 	{
