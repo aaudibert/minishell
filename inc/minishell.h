@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/19 15:54:44 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/23 19:31:21 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ char					**ft_initenv(char **env, int init);
 void					ft_print_env(char **env);
 int						get_env(char **env, char *val);
 int						ft_chdir(t_cpe *cpe);
+int						check_pwd(t_cpe *cpe);
+int						new_pwd(t_cpe *cpe);
 void					free_cpe(t_cpe *cpe, int i);
 #endif

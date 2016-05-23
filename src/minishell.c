@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/20 18:52:16 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/23 20:15:50 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_cpe		*ft_initcpe(char **env)
 	if (*env == NULL || !tmp)
 	{
 		ENV = noenv();
-		PATH = ft_strsplit("/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin", ':');
+		PATH = ft_strsplit(get_name(env, "PATH=", 5), ':');
 	}
 	else
 	{
@@ -50,14 +50,38 @@ t_cpe		*ft_initcpe(char **env)
 	return (cpe);
 }
 
+void		env_ch(t_cpe *cpe, int i, int j)
+{
+	if (ENV[i])
+	{
+		free(PATH);
+		PATH = ft_strsplit(get_name(ENV, "PATH=", 5), ':');
+	}
+	if (ENV[j])
+	{
+		free(HOME);
+		HOME = get_name(ENV, "HOME=", 5);
+	}
+	else
+	{
+		ft_putendl("koviojemvioaem");
+		if (HOME)
+			free(HOME);
+	}
+}
+
 int			set_cpe(t_cpe *cpe, char *cp, int ac)
 {
 	char	**av;
 	int		i;
+	int		j;
 
 	i = 0;
-	while (ENV[i] && ft_strncmp(ENV[i], "PATH", 4))
+	j = 0;
+	while (ENV[i] && ft_strncmp(ENV[i], "PATH=", 5))
 		i++;
+	while (ENV[j] && ft_strncmp(ENV[j], "HOME=", 5))
+		j++;
 	cp = replace_char(cp, '\t', ' ');
 	av = ft_strsplit(cp, ' ');
 	if (av[0])
@@ -65,11 +89,7 @@ int			set_cpe(t_cpe *cpe, char *cp, int ac)
 		CMD = ft_strdup(av[0]);
 		TPRM = get_tparam(av, HOME);
 		PRM = NULL;
-		if (ENV[i])
-		{
-			free(PATH);
-			PATH = ft_strsplit(get_name(ENV, "PATH=", 5), ':');
-		}
+		env_ch(cpe, i, j);
 		if (av[1])
 			PRM = get_param(av, HOME);
 	}

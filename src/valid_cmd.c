@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 16:04:18 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/18 21:33:05 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/23 19:23:15 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void		err_cmd(t_cpe *cpe)
 		ft_putjoin(TCMD, ": Command not found.");
 }
 
-int		get_cmd(t_cpe *cpe, char **path, int i, DIR *rep)
+int			get_cmd(t_cpe *cpe, char **path, int i, DIR *rep)
 {
 	TCMD = ft_strjoin(ft_strjoin(path[i], "/"), CMD);
 	closedir(rep);
 	return (0);
 }
 
-int		valid_cmd(t_cpe *cpe, int ac)
+int			valid_cmd(t_cpe *cpe, int ac)
 {
 	DIR			*rep;
 	t_dirent	*fr;
