@@ -6,7 +6,7 @@
 /*   By: aaudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/07 10:32:44 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/03/23 18:47:03 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/24 14:37:59 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,9 @@ void				ft_putjoin(char *s1, char *s2);
 char				*replace_char(char *s, char o, char r);
 int					ft_intlen(int i);
 void				print_length(char *s, int l);
+char				*replace_cwc(char *s, char o, char r);
+char				*replace_cws(char *s, char o, char *r);
+char				*replace_swc(char *s, char *o, char r);
+char				*replace_sws(char *s, char *o, char *r);
 
 #endif

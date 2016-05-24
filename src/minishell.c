@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/23 22:56:46 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/24 15:54:13 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,6 @@ void		env_ch(t_cpe *cpe, int i, int j)
 	{
 		free(HOME);
 		HOME = get_name(ENV, "HOME=", 5);
-	}
-	else
-	{
-		if (HOME)
-			free(HOME);
-		HOME = NULL;
 	}
 }
 
