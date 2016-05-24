@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:46:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/24 15:53:09 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/24 18:39:30 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,16 @@
 
 char		*ch_home(char *av, char *home)
 {
-	int		i;
-	char	*ret;
-	char	*tmp;
-	char	*tmp2;
+	int i;
 
 	i = 0;
 	while (av[i])
 	{
 		if (av[i] == '~')
-			break;
+			return (replace_cws(ft_strdup(av), '~', home));
 		i++;
 	}
-	if (av[i])
-	{
-		//Final fix ?
-		tmp = ft_strsub(av, 0, i - 1);
-		tmp2 = ft_strjoin(tmp, home);
-		free(tmp);
-		tmp = ft_strsub(av, i + 1, (ft_strlen(av) - i));
-		ret = ft_strjoin(tmp, tmp2);
-		free(tmp);
-		free(tmp2);
-	}
-	else
-		ret = ft_strdup(av);
-	ft_putendl(ret);
-	return (ret);
+	return (ft_strdup(av));
 }
 
 char		**get_param(char **av, char *home)
@@ -55,8 +38,7 @@ char		**get_param(char **av, char *home)
 	while (av[++j])
 	{
 		if (ft_strcmp(av[j], "~") != 0)
-			ret[i] = replace_cws(ft_strdup(av[j]), '~', home);
-			//ret[i] = ft_strdup(av[j]);
+			ret[i] = ch_home(av[j], home);
 		else
 			ret[i] = ft_strdup(home);
 		i++;
@@ -74,10 +56,8 @@ char		**get_tparam(char **av, char *home)
 	i = -1;
 	while (av[++i])
 	{
-		if (!home)
-			ret[i] = replace_cws(ft_strdup(av[i]), '~', "$home");
-		else if (ft_strcmp(av[i], "~") != 0)
-			ret[i] = replace_cws(av[i], '~', home);
+		if (ft_strcmp(av[i], "~") != 0)
+			ret[i] = ch_home(av[i], home);
 		else
 			ret[i] = ft_strdup(home);
 	}

@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 21:56:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/23 22:25:35 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/24 18:47:05 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ char		**ft_unset(t_cpe *cpe)
 	int		j;
 	char	**rt;
 
-	i = 0;
+	i = -1;
 	j = -1;
 	rt = (char **)malloc(sizeof(char *) * (arr_size(ENV) - check_var(cpe) + 1));
-	while (ENV[i])
+	while (ENV[++i])
 	{
 		while (skip_var(cpe, i))
 			i++;
@@ -79,8 +79,8 @@ char		**ft_unset(t_cpe *cpe)
 			rt[++j] = ft_strdup(ENV[i]);
 		else
 			break ;
-		i++;
 	}
+	rt[j] = 0;
 	return (rt);
 }
 
@@ -88,7 +88,12 @@ int			ft_unsetenv(t_cpe *cpe)
 {
 	char	**rt;
 
-	if (!PRM || !check_var(cpe))
+	if (!PRM)
+	{
+		ft_putendl("unsetenv: Too few arguments");
+		return (1);
+	}
+	if (!check_var(cpe))
 		return (1);
 	if (ENV[1])
 	{
