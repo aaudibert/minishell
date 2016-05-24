@@ -6,22 +6,38 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 16:17:50 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/02/20 20:51:38 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/24 20:35:11 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void		ft_print_env(char **env)
+char		*incr_sh(char **env, int init, int lvl)
 {
-	int i;
+	char	*ret;
+	char	*tmp;
 
-	i = 0;
-	while (env[i])
+	tmp = get_name(env, "SHLVL=", 6);
+	while (tmp[++lvl])
 	{
-		ft_putendl(env[i]);
-		i++;
+		if (!ft_isdigit(tmp[lvl]))
+		{
+			if (init == 0)
+			{
+				free(tmp);
+				return (ft_strdup("SHLVL=1"));
+			}
+			ret = ft_strjoin("SHLVL=", tmp);
+			free(tmp);
+			return (ret);
+		}
 	}
+	lvl = atoi(tmp) + 1;
+	free(tmp);
+	tmp = ft_itoa(lvl);
+	ret = ft_strjoin("SHLVL=", tmp);
+	free(tmp);
+	return (ret);
 }
 
 char		**ft_initenv(char **env, int init)
@@ -33,7 +49,10 @@ char		**ft_initenv(char **env, int init)
 	i = 0;
 	while (env[i])
 	{
-		ret[i] = ft_strdup(env[i]);
+		if (init == 1 || (ft_strncmp(env[i], "SHLVL=", 6) && init == 0))
+			ret[i] = ft_strdup(env[i]);
+		else
+			ret[i] = incr_sh(env, init, 5);
 		i++;
 	}
 	if (i == 1)
@@ -79,7 +98,8 @@ int			re_setenv(t_cpe *cpe)
 	i = 0;
 	while (ENV[i])
 	{
-		if (ft_strncmp(ENV[i], PRM[0], ft_strlen(PRM[0])) == 0)
+		if (ft_strncmp(ENV[i], PRM[0], ft_strlen(PRM[0])) == 0 &&
+				ENV[i][ft_strlen(PRM[0])] == '=')
 		{
 			if (PRM[1])
 			{

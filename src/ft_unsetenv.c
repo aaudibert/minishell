@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 21:56:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/24 18:47:05 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/24 21:56:07 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int			check_var(t_cpe *cpe)
 			break ;
 		while (ENV[j])
 		{
-			if (ft_strncmp(PRM[i], ENV[j], ft_strlen(PRM[i])) == 0)
+			if (ft_strncmp(PRM[i], ENV[j], ft_strlen(PRM[i])) == 0 &&
+					ENV[j][ft_strlen(PRM[i])])
 				ret++;
 			j++;
 		}
@@ -44,11 +45,12 @@ int			skip_var(t_cpe *cpe, int i)
 	int j;
 
 	j = 0;
-	if (!ENV[i])
+	/*if (!ENV[i])
 		return (0);
 	while (PRM[j])
 	{
-		if (ft_strncmp(PRM[j], ENV[i], ft_strlen(PRM[j])) == 0)
+		if (ft_strncmp(PRM[j], ENV[i], ft_strlen(PRM[j])) == 0 &&
+				ENV[i][ft_strlen(PRM[j])] == '=')
 		{
 			if (!ft_strcmp(PRM[j], "OLDPWD"))
 			{
@@ -57,6 +59,16 @@ int			skip_var(t_cpe *cpe, int i)
 			}
 			return (1);
 		}
+		j++;
+	}
+	return (0);*/
+	if (!ENV[i])
+		return (i);
+	while (PRM[j])
+	{
+		if (ft_strncmp(PRM[j], ENV[i], ft_strlen(PRM[j])) == 0 &&
+				ENV[i][ft_strlen(PRM[j])] == '=')
+			return (1);
 		j++;
 	}
 	return (0);
@@ -68,19 +80,23 @@ char		**ft_unset(t_cpe *cpe)
 	int		j;
 	char	**rt;
 
-	i = -1;
+	i = 0;
 	j = -1;
 	rt = (char **)malloc(sizeof(char *) * (arr_size(ENV) - check_var(cpe) + 1));
-	while (ENV[++i])
+	while (ENV[i])
 	{
-		while (skip_var(cpe, i))
-			i++;
+		/*while (skip_var(cpe, i))
+			i++;*/
+		i = i + skip_var(cpe, i);
 		if (ENV[i])
+		{
 			rt[++j] = ft_strdup(ENV[i]);
+		}
 		else
 			break ;
+		i++;
 	}
-	rt[j] = 0;
+	rt[++j] = 0;
 	return (rt);
 }
 
@@ -98,8 +114,9 @@ int			ft_unsetenv(t_cpe *cpe)
 	if (ENV[1])
 	{
 		rt = ft_unset(cpe);
-		rt[arr_size(rt)] = 0;
+		ft_putendl("ijdvijve");
 		ft_free_arr(ENV);
+		ft_putendl("ijdvijve");
 		ENV = rt;
 	}
 	else
