@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 14:14:55 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/25 18:43:14 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/25 22:25:37 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ void		ft_free_arr(char **arr)
 		return ;
 	while (arr[i])
 	{
-		if (arr[i])
-			free(arr[i]);
+		ft_putendl(arr[i]);
+		free(arr[i]);
 		i++;
 	}
+	ft_putendl("ijenviernv");
 	free(arr);
 }

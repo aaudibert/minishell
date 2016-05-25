@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 21:56:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/25 18:42:36 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/25 22:26:31 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			check_var(t_cpe *cpe)
 		while (ENV[j])
 		{
 			if (ft_strncmp(PRM[i], ENV[j], ft_strlen(PRM[i])) == 0 &&
-					ENV[j][ft_strlen(PRM[i])])
+					ENV[j][ft_strlen(PRM[i])] == '=')
 				ret++;
 			j++;
 		}
@@ -46,7 +46,7 @@ int			skip_var(t_cpe *cpe, int i)
 
 	j = 0;
 	if (!ENV[i])
-		return (i);
+		return (0);
 	while (PRM[j])
 	{
 		if (ft_strncmp(PRM[j], ENV[i], ft_strlen(PRM[j])) == 0 &&
@@ -65,21 +65,24 @@ char		**ft_unset(t_cpe *cpe)
 
 	i = 0;
 	j = -1;
+	ft_putnbr(arr_size(ENV) - check_var(cpe));
+	ft_putchar('\n');
+	ft_putnbr(check_var(cpe));
+	ft_putchar('\n');
 	rt = (char **)malloc(sizeof(char *) * (arr_size(ENV) - check_var(cpe)));
 	while (ENV[i])
 	{
-		i = i + skip_var(cpe, i);
+		while (skip_var(cpe, i))
+			i++;
 		if (ENV[i])
-		{
-			ft_putendl(ENV[i]);
-			ft_putendl("-------------------");
 			rt[++j] = ft_strdup(ENV[i]);
-		}
 		else
 			break ;
 		i++;
 	}
 	rt[++j] = 0;
+	ft_putnbr(j);
+	ft_putchar('\n');
 	return (rt);
 }
 
