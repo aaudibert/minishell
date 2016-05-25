@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 21:56:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/25 15:46:04 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/25 18:42:36 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,6 @@ int			skip_var(t_cpe *cpe, int i)
 	int j;
 
 	j = 0;
-	/*if (!ENV[i])
-		return (0);
-	while (PRM[j])
-	{
-		if (ft_strncmp(PRM[j], ENV[i], ft_strlen(PRM[j])) == 0 &&
-				ENV[i][ft_strlen(PRM[j])] == '=')
-		{
-			if (!ft_strcmp(PRM[j], "OLDPWD"))
-			{
-				free(OLDPWD);
-				OLDPWD = NULL;
-			}
-			return (1);
-		}
-		j++;
-	}
-	return (0);*/
 	if (!ENV[i])
 		return (i);
 	while (PRM[j])
@@ -85,11 +68,11 @@ char		**ft_unset(t_cpe *cpe)
 	rt = (char **)malloc(sizeof(char *) * (arr_size(ENV) - check_var(cpe)));
 	while (ENV[i])
 	{
-		/*while (skip_var(cpe, i))
-			i++;*/
 		i = i + skip_var(cpe, i);
 		if (ENV[i])
 		{
+			ft_putendl(ENV[i]);
+			ft_putendl("-------------------");
 			rt[++j] = ft_strdup(ENV[i]);
 		}
 		else
@@ -97,8 +80,6 @@ char		**ft_unset(t_cpe *cpe)
 		i++;
 	}
 	rt[++j] = 0;
-	ft_putnbr(j);
-	ft_putchar('\n');
 	return (rt);
 }
 
