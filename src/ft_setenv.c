@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 16:17:50 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/27 16:12:51 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/27 19:52:31 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char		**ft_initenv(char **env, int init)
 	char	**ret;
 
 	ret = (char **)malloc(sizeof(char *) * (arr_size(env) + 1 + init));
+	ft_putnbr(arr_size(env) + init);
+	ft_putchar('\n');
 	i = 0;
 	while (env[i])
 	{
@@ -58,7 +60,7 @@ char		**ft_initenv(char **env, int init)
 	if (i == 1)
 		ft_free_arr(env);
 	else
-		ret[i] = 0;
+		ret[arr_size(ret)] = 0;
 	return (ret);
 }
 
@@ -91,28 +93,28 @@ int			err_check(t_cpe *cpe)
 	return (0);
 }
 
-int			re_setenv(t_cpe *cpe)
+int			re_setenv(t_cpe *cpe, int i)
 {
 	char	*tmp;
-	int		i;
 
-	i = 0;
 	while (ENV[i])
 	{
 		if (ft_strncmp(ENV[i], PRM[0], ft_strlen(PRM[0])) == 0 &&
 				ENV[i][ft_strlen(PRM[0])] == '=')
 		{
 			free(ENV[i]);
+			tmp = ft_strjoin(PRM[0], "=");
 			if (PRM[1])
 			{
-				tmp = ft_strjoin(PRM[0], "=");
 				ENV[i] = ft_strjoin(tmp, PRM[1]);
 				free(tmp);
 				return (0);
 			}
 			else
 			{
+				ENV[i] = tmp;
 				return (1);
+			}
 		}
 		i++;
 	}
@@ -127,7 +129,7 @@ int			ft_setenv(t_cpe *cpe)
 	i = 0;
 	if (err_check(cpe) == 1)
 		return (1);
-	i = re_setenv(cpe);
+	i = re_setenv(cpe, 0);
 	if (i == 1 || i == 0)
 		return (i);
 	ENV = ft_initenv(ENV, 1);
