@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 16:17:50 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/26 15:34:14 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/27 16:12:51 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char		**ft_initenv(char **env, int init)
 	}
 	if (i == 1)
 		ft_free_arr(env);
-	if (init == 0)
+	else
 		ret[i] = 0;
 	return (ret);
 }
@@ -93,7 +93,8 @@ int			err_check(t_cpe *cpe)
 
 int			re_setenv(t_cpe *cpe)
 {
-	int i;
+	char	*tmp;
+	int		i;
 
 	i = 0;
 	while (ENV[i])
@@ -101,13 +102,16 @@ int			re_setenv(t_cpe *cpe)
 		if (ft_strncmp(ENV[i], PRM[0], ft_strlen(PRM[0])) == 0 &&
 				ENV[i][ft_strlen(PRM[0])] == '=')
 		{
+			free(ENV[i]);
 			if (PRM[1])
 			{
-				free(ENV[i]);
-				ENV[i] = ft_strjoin(ft_strjoin(PRM[0], "="), PRM[1]);
+				tmp = ft_strjoin(PRM[0], "=");
+				ENV[i] = ft_strjoin(tmp, PRM[1]);
+				free(tmp);
 				return (0);
 			}
 			else
+			{
 				return (1);
 		}
 		i++;
@@ -117,7 +121,8 @@ int			re_setenv(t_cpe *cpe)
 
 int			ft_setenv(t_cpe *cpe)
 {
-	int i;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	if (err_check(cpe) == 1)
@@ -127,9 +132,13 @@ int			ft_setenv(t_cpe *cpe)
 		return (i);
 	ENV = ft_initenv(ENV, 1);
 	if (PRM[1])
-		ENV[arr_size(ENV)] = ft_strjoin(ft_strjoin(PRM[0], "="), PRM[1]);
+	{
+		tmp = ft_strjoin(PRM[0], "=");
+		ENV[arr_size(ENV) - 1] = ft_strjoin(tmp, PRM[1]);
+		free(tmp);
+	}
 	else
-		ENV[arr_size(ENV)] = ft_strjoin(PRM[0], "=");
+		ENV[arr_size(ENV) - 1] = ft_strjoin(PRM[0], "=");
 	ENV[arr_size(ENV)] = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 21:56:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/26 22:35:09 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/27 16:03:30 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ char		**ft_unset(t_cpe *cpe)
 	ft_putendl("----------------------");
 	}
 	++j;
-	rt[j] = 0;
+	ft_putendl(rt[0]);
+	rt[arr_size(rt)] = 0;
+	ft_putnbr(arr_size(rt));
+	ft_putchar('\n');
 	ft_putnbr(j);
 	ft_putchar('\n');
 	print_arr(rt);
