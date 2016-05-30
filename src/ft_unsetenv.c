@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 21:56:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/27 16:03:30 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/30 21:42:50 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char		**ft_unset(t_cpe *cpe)
 
 	i = 0;
 	j = -1;
-	rt = (char **)malloc(sizeof(char *) * (arr_size(ENV) - check_var(cpe)));
+	rt = (char **)malloc(sizeof(char *) * (arr_size(ENV) - check_var(cpe) + 1));
 	ft_putnbr(arr_size(ENV) - check_var(cpe));
 	ft_putchar('\n');
 	while (ENV[i])
@@ -99,7 +99,7 @@ char		**ft_unset(t_cpe *cpe)
 	}
 	++j;
 	ft_putendl(rt[0]);
-	rt[arr_size(rt)] = 0;
+	rt[arr_size(rt) + 1] = 0;
 	ft_putnbr(arr_size(rt));
 	ft_putchar('\n');
 	ft_putnbr(j);
