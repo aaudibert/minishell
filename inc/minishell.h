@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/23 22:40:15 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/31 21:54:09 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define ENV			cpe->env
 # define PRM			cpe->prm
 # define TPRM			cpe->tprm
+# define NENV			cpe->no_env
 
 extern int				g_ex;
 
@@ -62,6 +63,7 @@ typedef struct			s_cpe
 	char				**env;
 	char				**prm;
 	char				**tprm;
+	int					no_env;
 }						t_cpe;
 
 char					*print_prompt(char *prompt, int ex, char *home);

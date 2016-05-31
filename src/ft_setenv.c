@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 16:17:50 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/30 21:38:45 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/31 21:26:51 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,13 @@ char		**ft_initenv(char **env, int init)
 			ret[i] = incr_sh(env, init, 5);
 		i++;
 	}
-	if (i == 1)
+	if (init == 1)
+	{
 		ft_free_arr(env);
+		ret[++i] = 0;
+	}
 	else
-		ret[arr_size(ret)] = 0;
+		ret[i] = 0;
 	return (ret);
 }
 
@@ -111,7 +114,7 @@ int			re_setenv(t_cpe *cpe, int i)
 			else
 			{
 				ENV[i] = tmp;
-				return (1);
+				return (0);
 			}
 		}
 		i++;
@@ -139,6 +142,5 @@ int			ft_setenv(t_cpe *cpe)
 	}
 	else
 		ENV[arr_size(ENV)] = ft_strjoin(PRM[0], "=");
-	ENV[arr_size(ENV) + 1] = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 21:56:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/30 21:42:50 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/31 21:55:55 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,45 +66,18 @@ char		**ft_unset(t_cpe *cpe)
 	i = 0;
 	j = -1;
 	rt = (char **)malloc(sizeof(char *) * (arr_size(ENV) - check_var(cpe) + 1));
-	ft_putnbr(arr_size(ENV) - check_var(cpe));
-	ft_putchar('\n');
 	while (ENV[i])
 	{
-		ft_putstr("pre skip ");
-		ft_putstr("i == ");
-		ft_putnbr(i);
-		ft_putchar('\n');
 		while (skip_var(cpe, i))
 			i++;
-		ft_putstr("post skip ");
-		ft_putstr("i == ");
-		ft_putnbr(i);
-		ft_putchar('\n');
 		if (ENV[i])
-		{
-			ft_putendl(ENV[i]);
-			ft_putstr("dup ");
-			ft_putstr("i == ");
-			ft_putnbr(i);
-			ft_putchar('\n');
 			rt[++j] = ft_strdup(ENV[i]);
-			ft_putendl(rt[j]);
-			ft_putnbr(j);
-			ft_putchar('\n');
-		}
 		else
 			break ;
 		i++;
-	ft_putendl("----------------------");
 	}
 	++j;
-	ft_putendl(rt[0]);
-	rt[arr_size(rt) + 1] = 0;
-	ft_putnbr(arr_size(rt));
-	ft_putchar('\n');
-	ft_putnbr(j);
-	ft_putchar('\n');
-	print_arr(rt);
+	rt[j] = 0;
 	return (rt);
 }
 
@@ -117,14 +90,11 @@ int			ft_unsetenv(t_cpe *cpe)
 		ft_putendl("unsetenv: Too few arguments");
 		return (1);
 	}
-	if (!check_var(cpe))
+	if (!check_var(cpe) || NENV)
 		return (1);
 	if (ENV[1])
 	{
 		rt = ft_unset(cpe);
-		ft_putendl("--PRINT ENV--");
-		print_arr(rt);
-		ft_putendl("-------------");
 		ft_free_arr(ENV);
 		ENV = rt;
 	}

@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 16:22:56 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/24 18:46:04 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/05/31 22:07:38 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,33 @@ int			exec_exit(t_cpe *cpe)
 		exit(0);
 }
 
+int			check_envi(t_cpe *cpe)
+{
+	int i;
+
+	i = 0;
+	if (NENV && ft_strcmp(PRM[0], "env") && ft_strcmp(PRM[0], "unsetenv") &&
+			ft_strcmp(PRM[0], "setenv"))
+		return (10);
+	if (!PRM)
+		return (print_arr(ENV) + 10);
+	else if (!ft_strcmp(PRM[0], "-i"))
+	{
+		while (PRM[i + 1])
+		{
+			free(PRM[i]);
+			PRM[i] = ft_strdup(PRM[i + 1]);
+			i++;
+		}
+		free(PRM[i]);
+		PRM[i] = 0;
+		NENV = 1;
+	}
+	if (!NENV)
+		check_builtins(cpe);
+	return (-1);
+}
+
 int			check_builtins(t_cpe *cpe)
 {
 	check_cmd_path(cpe);
@@ -53,7 +80,7 @@ int			check_builtins(t_cpe *cpe)
 	else if (ft_strcmp(CMD, "cd") == 0)
 		return (ft_chdir(cpe));
 	else if (ft_strcmp(CMD, "env") == 0)
-		return (print_arr(ENV) + 10);
+		return (check_envi(cpe));
 	else if (ft_strcmp(CMD, "setenv") == 0)
 	{
 		if (!PRM)
