@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 15:28:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/23 22:34:44 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/01 20:18:07 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ int			cd_err(char *path)
 void		home_path(t_cpe *cpe)
 {
 	if (!PRM)
-		PRM = (char **)malloc(sizeof(char *) * 1);
+	{
+		PRM = (char **)malloc(sizeof(char *) * 2);
+		PRM[1] = 0;
+	}
 	else
 		free(PRM[0]);
 	PRM[0] = ft_strdup(HOME);

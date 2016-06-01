@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:46:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/24 18:39:30 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/01 21:43:42 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char		**get_param(char **av, char *home)
 	int		i;
 	int		j;
 
-	ret = (char**)malloc(sizeof(char *) * arr_size(av));
+	ret = (char**)malloc(sizeof(char *) * arr_size(av) + 1);
 	i = 0;
 	j = 0;
 	while (av[++j])
