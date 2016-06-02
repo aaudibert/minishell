@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/23 19:27:34 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/23 22:24:46 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/02 20:09:38 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		handle_pwd(t_cpe *cpe, int p, int o)
 	{
 		free(PRM[0]);
 		PRM[0] = ft_strdup(OLDPWD);
+		if (cd_err(PRM[0]))
+			return (1);
 		ft_putendl(PRM[0]);
 	}
 	if (OLDPWD)

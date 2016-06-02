@@ -1,52 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_struct.c                                      :+:      :+:    :+:   */
+/*   ft_initenv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/13 18:44:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/02 17:17:38 by aaudiber         ###   ########.fr       */
+/*   Created: 2016/06/02 19:52:50 by aaudiber          #+#    #+#             */
+/*   Updated: 2016/06/02 19:53:14 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void		del_cpe(t_cpe *cpe)
+char		**ft_initenv(char **env, int init)
 {
-	if (OLDPWD)
-		free(OLDPWD);
-	if (HOME)
-		free(HOME);
-	if (PATH)
-		free(PATH);
-	if (ENV)
-		ft_free_arr(ENV);
-	free(cpe);
-}
+	int		i;
+	char	**ret;
 
-void		free_cpe(t_cpe *cpe, int i)
-{
-	if (CMD)
+	ret = (char **)malloc(sizeof(char *) * (arr_size(env) + 1 + init));
+	i = 0;
+	while (env[i])
 	{
-		free(CMD);
-		CMD = NULL;
+		if (init == 1 || (ft_strncmp(env[i], "SHLVL=", 6) && init == 0))
+			ret[i] = ft_strdup(env[i]);
+		else
+			ret[i] = incr_sh(env, init, 5);
+		i++;
 	}
-	if (PRM)
+	if (init == 1)
 	{
-		ft_free_arr(PRM);
-		PRM = NULL;
+		ft_free_arr(env);
+		ret[++i] = 0;
 	}
-	if (TCMD)
-	{
-		free(TCMD);
-		TCMD = NULL;
-	}
-	if (TPRM)
-	{
-		ft_free_arr(TPRM);
-		TPRM = NULL;
-	}
-	if (i == 0)
-		del_cpe(cpe);
+	else
+		ret[i] = 0;
+	return (ret);
 }

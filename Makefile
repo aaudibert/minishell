@@ -6,7 +6,7 @@
 #    By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 16:20:10 by aaudiber          #+#    #+#              #
-#    Updated: 2016/05/23 19:29:13 by aaudiber         ###   ########.fr        #
+#    Updated: 2016/06/02 19:53:35 by aaudiber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC = ./src/minishell.c\
 	  ./src/get_next_line.c\
 	  ./src/get_name.c\
 	  ./src/print_prompt.c\
+	  ./src/ft_initenv.c\
 	  ./src/ft_setenv.c\
 	  ./src/ft_unsetenv.c\
 	  ./src/free_struct.c\

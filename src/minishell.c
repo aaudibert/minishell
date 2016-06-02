@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/01 20:14:38 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/02 19:15:28 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ int			main(int ac, char **av, char **env)
 	while (42)
 	{
 		prompt = print_prompt(prompt, ac, HOME);
-		get_next_line(0, &line);
+		if (get_next_line(0, &line) == 0)
+			exit(0);
 		ac = set_cpe(cpe, line, ac);
 		g_ex = 0;
 		if (ac == 0)

@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 16:17:50 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/01 21:03:46 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/02 20:01:16 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,31 +40,6 @@ char		*incr_sh(char **env, int init, int lvl)
 	return (ret);
 }
 
-char		**ft_initenv(char **env, int init)
-{
-	int		i;
-	char	**ret;
-
-	ret = (char **)malloc(sizeof(char *) * (arr_size(env) + 1 + init));
-	i = 0;
-	while (env[i])
-	{
-		if (init == 1 || (ft_strncmp(env[i], "SHLVL=", 6) && init == 0))
-			ret[i] = ft_strdup(env[i]);
-		else
-			ret[i] = incr_sh(env, init, 5);
-		i++;
-	}
-	if (init == 1)
-	{
-		ft_free_arr(env);
-		ret[++i] = 0;
-	}
-	else
-		ret[i] = 0;
-	return (ret);
-}
-
 int			err_check(t_cpe *cpe)
 {
 	int i;
@@ -94,6 +69,21 @@ int			err_check(t_cpe *cpe)
 	return (0);
 }
 
+int			new_env_val(t_cpe *cpe, int i)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(PRM[0], "=");
+	if (!ft_strcmp(PRM[0], "OLDPWD"))
+	{
+		free(OLDPWD);
+		OLDPWD = ft_strdup(PRM[1]);
+	}
+	ENV[i] = ft_strjoin(tmp, PRM[1]);
+	free(tmp);
+	return (0);
+}
+
 int			re_setenv(t_cpe *cpe, int i)
 {
 	char	*tmp;
@@ -104,15 +94,11 @@ int			re_setenv(t_cpe *cpe, int i)
 				ENV[i][ft_strlen(PRM[0])] == '=')
 		{
 			free(ENV[i]);
-			tmp = ft_strjoin(PRM[0], "=");
 			if (PRM[1])
-			{
-				ENV[i] = ft_strjoin(tmp, PRM[1]);
-				free(tmp);
-				return (0);
-			}
+				return (new_env_val(cpe, i));
 			else
 			{
+				tmp = ft_strjoin(PRM[0], "=");
 				ENV[i] = tmp;
 				return (0);
 			}

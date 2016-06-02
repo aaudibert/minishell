@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 15:28:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/01 20:18:07 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/02 20:05:08 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int			ft_chdir(t_cpe *cpe)
 		if (cd_err(PRM[0]))
 			return (1);
 	}
-	check_pwd(cpe);
+	if (check_pwd(cpe))
+		return (1);
 	chdir(PRM[0]);
 	return (new_pwd(cpe));
 }
