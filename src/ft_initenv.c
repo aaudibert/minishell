@@ -6,13 +6,13 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 19:52:50 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/02 19:53:14 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/06 22:49:53 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char		**ft_initenv(char **env, int init)
+char		**ft_initenv(char **env, int init, t_cpe *cpe)
 {
 	int		i;
 	char	**ret;
@@ -30,6 +30,7 @@ char		**ft_initenv(char **env, int init)
 	if (init == 1)
 	{
 		ft_free_arr(env);
+		ret[i] = ft_strjoin(PRM[0], "=");
 		ret[++i] = 0;
 	}
 	else

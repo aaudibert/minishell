@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/02 20:09:12 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/06 22:04:12 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int						check_builtins(t_cpe *cpe);
 int						ex_cmd(t_cpe *cpe);
 int						ft_setenv(t_cpe *cpe);
 int						ft_unsetenv(t_cpe *cpe);
-char					**ft_initenv(char **env, int init);
+char					**ft_initenv(char **env, int init, t_cpe *cpe);
 void					ft_print_env(char **env);
 int						get_env(char **env, char *val);
 int						ft_chdir(t_cpe *cpe);

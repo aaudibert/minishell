@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 16:22:56 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/02 20:36:46 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/06 22:08:18 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			check_builtins(t_cpe *cpe)
 	{
 		if (!PRM)
 			return (print_arr(ENV) + 10);
-		if (PRM[2])
+		if (arr_size(PRM) > 2)
 		{
 			ft_putendl("setenv: Too many arguments");
 			ft_putendl("usage: setenv [name[value]]");

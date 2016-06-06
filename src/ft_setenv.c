@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 16:17:50 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/02 20:01:16 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/06 22:47:44 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int			re_setenv(t_cpe *cpe, int i)
 				ENV[i][ft_strlen(PRM[0])] == '=')
 		{
 			free(ENV[i]);
-			if (PRM[1])
+			if (arr_size(PRM) == 2)
 				return (new_env_val(cpe, i));
 			else
 			{
@@ -119,14 +119,13 @@ int			ft_setenv(t_cpe *cpe)
 	i = re_setenv(cpe, 0);
 	if (i == 1 || i == 0)
 		return (i);
-	ENV = ft_initenv(ENV, 1);
-	if (PRM[1])
+	ENV = ft_initenv(ENV, 1, cpe);
+	if (arr_size(PRM) == 2)
 	{
-		tmp = ft_strjoin(PRM[0], "=");
-		ENV[arr_size(ENV)] = ft_strjoin(tmp, PRM[1]);
-		free(tmp);
+		i = arr_size(ENV) - 1;
+		tmp = ft_strjoin(ENV[i], PRM[1]);
+		free(ENV[i]);
+		ENV[i] = tmp;
 	}
-	else
-		ENV[arr_size(ENV)] = ft_strjoin(PRM[0], "=");
 	return (0);
 }
