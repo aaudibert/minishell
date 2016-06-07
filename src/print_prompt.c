@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 20:34:08 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/05/23 21:48:36 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/07 18:41:12 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char		*print_prompt(char *prompt, int ex, char *home)
 	getcwd(tmp, PATH_MAX);
 	if (home != NULL && ft_strcmp(tmp, home) == 0)
 		tmp2 = ft_strdup("~");
+	else if (ft_strcmp(tmp, "/") == 0)
+		tmp2 = ft_strdup("/");
 	else
 		tmp2 = get_cdn(tmp, 0);
 	if (!prompt || ft_strcmp(tmp, prompt) != 0)

@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/06 22:03:52 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/07 20:24:45 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,19 @@ t_cpe		*ft_initcpe(char **env)
 
 void		env_ch(t_cpe *cpe, int i, int j)
 {
+	int o;
+
+	o = 0;
+	while (ENV[o])
+	{
+		if (ft_strncmp(ENV[o], "OLDPWD=", 7) == 0)
+		{
+			if (OLDPWD)
+				free(OLDPWD);
+			OLDPWD = get_name(ENV, "OLDPWD=", 7);
+		}
+		o++;
+	}
 	if (ENV[i])
 	{
 		free(PATH);
