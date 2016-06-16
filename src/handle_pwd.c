@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/23 19:27:34 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/08 16:37:28 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/09 20:52:27 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		check_pwd(t_cpe *cpe)
 		if (ft_strncmp(ENV[j], "OLDPWD=", 7) == 0)
 			break ;
 	}
-	if (ft_strcmp(PRM[0], "-") == 0 && !ENV[j] && !OLDPWD)
+	if (ft_strcmp(PRM[0], "-") == 0 && !ENV[j] && !OLDPWD && !NENV)
 	{
 		ft_putendl(": No such file or directory.");
 		return (1);

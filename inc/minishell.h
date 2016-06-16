@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/06 22:04:12 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/10 17:24:04 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char					**get_tparam(char **av, char *home);
 char					*incr_sh(char **env, int init, int lvl);
 int						valid_cmd(t_cpe *cpe, int ac);
 int						check_builtins(t_cpe *cpe);
+int						check_envi(t_cpe *cpe);
 int						ex_cmd(t_cpe *cpe);
 int						ft_setenv(t_cpe *cpe);
 int						ft_unsetenv(t_cpe *cpe);

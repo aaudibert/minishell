@@ -6,7 +6,7 @@
 #    By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 16:20:10 by aaudiber          #+#    #+#              #
-#    Updated: 2016/06/02 19:53:35 by aaudiber         ###   ########.fr        #
+#    Updated: 2016/06/09 21:41:16 by aaudiber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC = ./src/minishell.c\
 	  ./src/free_struct.c\
 	  ./src/valid_cmd.c\
 	  ./src/ex_cmd.c\
+	  ./src/ft_envi.c\
 	  ./src/ft_chdir.c\
 	  ./src/handle_pwd.c\
 	  ./src/signhandler.c\

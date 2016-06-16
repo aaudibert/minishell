@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 16:22:56 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/06 22:08:18 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/10 18:06:14 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ void		check_cmd_path(t_cpe *cpe)
 	}
 }
 
-int			exec_exit(t_cpe *cpe)
+int			exec_err(t_cpe *cpe)
 {
+	int i;
+
+	i = 0;
 	if (ft_strcmp(CMD, "exit") == 0 && PRM)
 	{
 		ft_putendl("exit: Expression Syntax.");
@@ -45,38 +48,11 @@ int			exec_exit(t_cpe *cpe)
 		exit(0);
 }
 
-int			check_envi(t_cpe *cpe)
-{
-	int i;
-
-	i = 0;
-	if (NENV && ft_strcmp(PRM[0], "env") && ft_strcmp(PRM[0], "unsetenv") &&
-			ft_strcmp(PRM[0], "setenv"))
-		return (10);
-	if (!PRM)
-		return (print_arr(ENV) + 10);
-	else if (!ft_strcmp(PRM[0], "-i"))
-	{
-		while (PRM[i + 1])
-		{
-			free(PRM[i]);
-			PRM[i] = ft_strdup(PRM[i + 1]);
-			i++;
-		}
-		free(PRM[i]);
-		PRM[i] = 0;
-		NENV = 1;
-	}
-	if (!NENV)
-		check_builtins(cpe);
-	return (-1);
-}
-
 int			check_builtins(t_cpe *cpe)
 {
 	check_cmd_path(cpe);
 	if (ft_strcmp(CMD, "exit") == 0)
-		return (exec_exit(cpe));
+		return (exec_err(cpe));
 	else if (ft_strcmp(CMD, "cd") == 0)
 		return (ft_chdir(cpe));
 	else if (ft_strcmp(CMD, "env") == 0)
@@ -110,7 +86,10 @@ int			ex_cmd(t_cpe *cpe)
 		wait(&w);
 	if (father == 0)
 	{
-		execve(TCMD, TPRM, ENV);
+		if (!NENV)
+			execve(TCMD, TPRM, ENV);
+		else
+			execve(TCMD, TPRM, NULL);
 		exit(0);
 	}
 	g_ex = 0;
