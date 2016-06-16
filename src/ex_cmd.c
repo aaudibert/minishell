@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 16:22:56 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/10 18:06:14 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/16 21:30:53 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int			check_builtins(t_cpe *cpe)
 	check_cmd_path(cpe);
 	if (ft_strcmp(CMD, "exit") == 0)
 		return (exec_err(cpe));
+	if (ft_strcmp(CMD, "echo") == 0)
+		return (ft_echo(cpe) + 10);
 	else if (ft_strcmp(CMD, "cd") == 0)
 		return (ft_chdir(cpe));
 	else if (ft_strcmp(CMD, "env") == 0)

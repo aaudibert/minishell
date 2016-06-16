@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/10 17:24:04 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/16 22:40:06 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define TCMD			cpe->tcmd
 # define PATH			cpe->path
 # define OLDPWD			cpe->opwd
+# define OCMD			cpe->ocmd
 # define HOME			cpe->home
 # define ENV			cpe->env
 # define PRM			cpe->prm
@@ -59,6 +60,7 @@ typedef struct			s_cpe
 	char				*tcmd;
 	char				*home;
 	char				*opwd;
+	char				*ocmd;
 	char				**path;
 	char				**env;
 	char				**prm;
@@ -78,6 +80,7 @@ int						valid_cmd(t_cpe *cpe, int ac);
 int						check_builtins(t_cpe *cpe);
 int						check_envi(t_cpe *cpe);
 int						ex_cmd(t_cpe *cpe);
+int						ft_echo(t_cpe *cpe);
 int						ft_setenv(t_cpe *cpe);
 int						ft_unsetenv(t_cpe *cpe);
 char					**ft_initenv(char **env, int init, t_cpe *cpe);

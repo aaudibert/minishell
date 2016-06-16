@@ -6,7 +6,7 @@
 #    By: aaudiber <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/06 18:24:16 by aaudiber          #+#    #+#              #
-#    Updated: 2016/05/24 15:15:58 by aaudiber         ###   ########.fr        #
+#    Updated: 2016/06/16 22:53:24 by aaudiber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,7 @@ SRC = ft_memset.c\
 	  print_length.c\
 	  replace_cwc.c\
 	  replace_cws.c\
+	  ft_unsplit.c\
 
 OBJ = $(SRC:.c=.o)
 

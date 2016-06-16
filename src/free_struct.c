@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 18:44:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/06 20:16:14 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/16 23:05:26 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void		del_cpe(t_cpe *cpe)
 {
+	if (OCMD)
+		free(OCMD);
 	if (OLDPWD)
 		free(OLDPWD);
 	if (HOME)
@@ -25,8 +27,25 @@ void		del_cpe(t_cpe *cpe)
 	free(cpe);
 }
 
+void		get_ocmd(t_cpe *cpe)
+{
+	int		i;
+
+	i = 0;
+	if (OCMD)
+	{
+		free(OCMD);
+		OCMD = NULL;
+	}
+	if (TPRM)
+		OCMD = ft_unsplit(TPRM, ' ');
+	else
+		OCMD = ft_strdup("");
+}
+
 void		free_cpe(t_cpe *cpe, int i)
 {
+	get_ocmd(cpe);
 	if (CMD)
 	{
 		free(CMD);
