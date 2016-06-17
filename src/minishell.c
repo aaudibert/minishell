@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/08 16:30:18 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/17 21:32:35 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_cpe		*ft_initcpe(char **env)
 	cpe = (t_cpe *)malloc(sizeof(t_cpe));
 	ft_bzero(cpe, sizeof(t_cpe));
 	NENV = 0;
+	OCMD = ft_strdup("");
 	if (*env == NULL || !tmp)
 	{
 		ENV = noenv();

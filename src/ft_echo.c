@@ -6,13 +6,13 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 20:04:00 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/16 23:05:37 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/17 21:05:45 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int		val_env(t_cpe *cpe, int v)
+int			val_env(t_cpe *cpe, int v)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -29,30 +29,44 @@ int		val_env(t_cpe *cpe, int v)
 			return (1);
 		}
 		free(tmp);
-		if (ft_strcmp(PRM[v], "_="))
-		{
-			free(PRM[v]);
+		free(PRM[v]);
+		if (ft_strcmp(PRM[v], "$_"))
 			PRM[v] = ft_strdup(tmp2);
-		}
+		else
+			PRM[v] = ft_strdup(OCMD);
 		free(tmp2);
 	}
 	return (0);
 }
 
-int		err_handle(t_cpe *cpe)
+void		handle_quote(t_cpe *cpe, int i)
+{
+	char *tmp;
+
+	if (PRM[i][0] != '"')
+		return ;
+	tmp = ft_strsub(PRM[i], 1, (ft_strlen(PRM[i]) - 2));
+	free(PRM[i]);
+	PRM[i] = ft_strdup(tmp);
+	free(tmp);
+}
+
+int			err_handle(t_cpe *cpe)
 {
 	int		i;
 
 	i = 0;
 	while (PRM[i])
 	{
-		if ((PRM[i][0] == '"' && PRM[i][ft_strlen(PRM[i])] != '"') ||
-				(PRM[i][0] != '"' && PRM[i][ft_strlen(PRM[i])] == '"'))
+		if ((PRM[i][0] == '"' && PRM[i][ft_strlen(PRM[i]) - 1] != '"') ||
+				(PRM[i][0] != '"' && PRM[i][ft_strlen(PRM[i]) - 1] == '"') ||
+				!ft_strcmp(PRM[i], "\"$_\""))
 		{
 			ft_putendl("Unmatched \".");
 			return (1);
 		}
-		else if (val_env(cpe, i))
+		handle_quote(cpe, i);
+		if (ft_strcmp(PRM[i], "$") && val_env(cpe, i))
 		{
 			ft_putstr(PRM[i]);
 			ft_putendl(": Undefined variable.");
@@ -63,7 +77,7 @@ int		err_handle(t_cpe *cpe)
 	return (0);
 }
 
-int		ft_echo(t_cpe *cpe)
+int			ft_echo(t_cpe *cpe)
 {
 	int i;
 
@@ -72,8 +86,11 @@ int		ft_echo(t_cpe *cpe)
 		return (1);
 	while (PRM[i])
 	{
-		//finish him
+		ft_putstr(PRM[i]);
+		if (PRM[i + 1])
+			ft_putchar(' ');
 		i++;
 	}
+	ft_putchar('\n');
 	return (0);
 }
