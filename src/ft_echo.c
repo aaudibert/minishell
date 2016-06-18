@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/16 20:04:00 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/17 21:05:45 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/18 22:42:30 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,34 @@ void		handle_quote(t_cpe *cpe, int i)
 
 	if (PRM[i][0] != '"')
 		return ;
-	tmp = ft_strsub(PRM[i], 1, (ft_strlen(PRM[i]) - 2));
-	free(PRM[i]);
-	PRM[i] = ft_strdup(tmp);
-	free(tmp);
+	if (ft_strcmp(PRM[i], "\"\""))
+	{
+		tmp = ft_strsub(PRM[i], 1, (ft_strlen(PRM[i]) - 2));
+		free(PRM[i]);
+		PRM[i] = ft_strdup(tmp);
+		free(tmp);
+	}
+	else
+	{
+		free(PRM[i]);
+		PRM[i] = ft_strdup("\n");
+	}
+}
+
+int			quote_nb(t_cpe *cpe, int v)
+{
+	int i;
+	int nb;
+
+	i = 0;
+	nb = 0;
+	while (PRM[v][i])
+	{
+		if (PRM[v][i] == '"')
+			nb++;
+		i++;
+	}
+	return (nb % 2);
 }
 
 int			err_handle(t_cpe *cpe)
@@ -56,11 +80,11 @@ int			err_handle(t_cpe *cpe)
 	int		i;
 
 	i = 0;
+	if (!PRM)
+		return (0);
 	while (PRM[i])
 	{
-		if ((PRM[i][0] == '"' && PRM[i][ft_strlen(PRM[i]) - 1] != '"') ||
-				(PRM[i][0] != '"' && PRM[i][ft_strlen(PRM[i]) - 1] == '"') ||
-				!ft_strcmp(PRM[i], "\"$_\""))
+		if (quote_nb(cpe, i) || !ft_strcmp(PRM[i], "\"$_\""))
 		{
 			ft_putendl("Unmatched \".");
 			return (1);
@@ -84,12 +108,15 @@ int			ft_echo(t_cpe *cpe)
 	i = 0;
 	if (err_handle(cpe))
 		return (1);
-	while (PRM[i])
+	if (PRM)
 	{
-		ft_putstr(PRM[i]);
-		if (PRM[i + 1])
-			ft_putchar(' ');
-		i++;
+		while (PRM[i])
+		{
+			ft_putstr_skip(PRM[i], '"');
+			if (PRM[i + 1])
+				ft_putchar(' ');
+			i++;
+		}
 	}
 	ft_putchar('\n');
 	return (0);

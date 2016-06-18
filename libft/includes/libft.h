@@ -6,7 +6,7 @@
 /*   By: aaudiber <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/07 10:32:44 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/17 22:13:17 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/18 22:35:10 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ char				*replace_cws(char *s, char o, char *r);
 char				*replace_swc(char *s, char *o, char r);
 char				*replace_sws(char *s, char *o, char *r);
 char				*ft_unsplit(char **s, char r);
+void				ft_putstr_skip(char *s, char c);
+void				ft_putendl_skip(char *s, char c);
 
 #endif

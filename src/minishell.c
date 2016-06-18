@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/17 21:32:35 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/18 21:00:06 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ int			set_cpe(t_cpe *cpe, char *cp, int ac)
 		i++;
 	while (ENV[j] && ft_strncmp(ENV[j], "HOME=", 5))
 		j++;
-	cp = replace_char(cp, '\t', ' ');
-	av = ft_strsplit(cp, ' ');
+	av = param_quote(cp);
 	if (av[0])
 	{
 		CMD = ft_strdup(av[0]);

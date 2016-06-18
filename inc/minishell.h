@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/16 22:40:06 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/18 22:47:01 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char					*print_prompt(char *prompt, int ex, char *home);
 int						get_next_line(int const fd, char **line);
 void					check_sign(void);
 char					*get_name(char **env, char *s, int len);
+char					**param_quote(char *s);
 char					*get_cdn(char *s, int m);
 char					**get_param(char **av, char *home);
 char					**get_tparam(char **av, char *home);
@@ -81,6 +82,7 @@ int						check_builtins(t_cpe *cpe);
 int						check_envi(t_cpe *cpe);
 int						ex_cmd(t_cpe *cpe);
 int						ft_echo(t_cpe *cpe);
+int						quote_nb(t_cpe *cpe, int v);
 int						ft_setenv(t_cpe *cpe);
 int						ft_unsetenv(t_cpe *cpe);
 char					**ft_initenv(char **env, int init, t_cpe *cpe);
