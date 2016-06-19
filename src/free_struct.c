@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 18:44:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/16 23:05:26 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/06/19 19:33:31 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		get_ocmd(t_cpe *cpe)
 		OCMD = NULL;
 	}
 	if (TPRM)
-		OCMD = ft_unsplit(TPRM, ' ');
+		OCMD = ft_unsplit(TPRM, " ");
 	else
 		OCMD = ft_strdup("");
 }
