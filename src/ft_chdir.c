@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 15:28:23 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/09 20:31:22 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/08/11 18:09:49 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int			cd_err(char *path)
 	{
 		if ((sb.st_mode & S_IFMT) != S_IFDIR && access(path, F_OK) == 0)
 		{
-			ft_putendl(path);
-			ft_putstr(": Not a directory.");
+			ft_putstr(path);
+			ft_putendl(": Not a directory.");
 			return (1);
 		}
 		ft_putstr(path);

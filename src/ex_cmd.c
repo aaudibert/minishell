@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 16:22:56 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/16 21:30:53 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/08/16 17:54:13 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,45 @@ void		check_cmd_path(t_cpe *cpe)
 	}
 }
 
+int			no_digit(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (ft_isdigit(s[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int			exec_err(t_cpe *cpe)
 {
 	int i;
 
 	i = 0;
-	if (ft_strcmp(CMD, "exit") == 0 && PRM)
+	if (ft_strcmp(CMD, "exit") == 0 && (PRM[1] || no_digit(PRM[0])))
 	{
 		ft_putendl("exit: Expression Syntax.");
 		return (11);
 	}
 	else
+	{
+		if (!PRM[0])
+			exit(0);
+		while (PRM[0][i])
+		{
+			if (!ft_isdigit(PRM[0][i]))
+			{
+				ft_putendl("exit: Badly formed number.");
+				return (11);
+			}
+			i++;
+		}
 		exit(0);
+	}
 }
 
 int			check_builtins(t_cpe *cpe)
