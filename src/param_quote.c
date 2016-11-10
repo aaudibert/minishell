@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/18 16:03:39 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/18 22:19:28 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/09/28 22:00:17 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char		*get_dup(char *s, int st)
 	int j;
 
 	i = st;
-	while (s[i] && s[i] != ' ' &&  s[i] != '\t')
+	while (s[i] && s[i] != ' ' && s[i] != '\t')
 	{
 		if (s[i] == '"')
 		{
@@ -66,7 +66,7 @@ int			skip_sp(char *s, int i)
 {
 	int j;
 
-	while (s[i] && s[i] != ' ' &&  s[i] != '\t')
+	while (s[i] && s[i] != ' ' && s[i] != '\t')
 	{
 		if (s[i] == '"')
 		{
@@ -95,7 +95,7 @@ char		**dup_prm(char *s)
 		while ((s[i] == ' ' || s[i] == '\t') && s[i])
 			i++;
 		if (!s[i])
-			break;
+			break ;
 		ret[j] = get_dup(s, i);
 		i = skip_sp(s, i);
 		j++;
@@ -104,23 +104,23 @@ char		**dup_prm(char *s)
 	return (ret);
 }
 
-char		**param_quote(char *s)
+char		**param_quote(t_cpe *cpe)
 {
 	int i;
 	int j;
 
 	i = 0;
 	j = 0;
-	while (s[i] && (s[i] != ' ' || s[i] != '\t'))
+	while (LINE[i] && (LINE[i] != ' ' || LINE[i] != '\t'))
 	{
-		if (s[i] == '"')
+		if (LINE[i] == '"')
 			j++;
 		i++;
 	}
 	if (j <= 1)
 	{
-		s = replace_char(s, '\t', ' ');
-		return (ft_strsplit(s, ' '));
+		LINE = replace_char(LINE, '\t', ' ');
+		return (ft_strsplit(LINE, ' '));
 	}
-	return (dup_prm(s));
+	return (dup_prm(LINE));
 }

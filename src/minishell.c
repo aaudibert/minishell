@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/19 18:35:20 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/09/28 22:01:48 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_cpe		*ft_initcpe(char **env)
 	cpe = (t_cpe *)malloc(sizeof(t_cpe));
 	ft_bzero(cpe, sizeof(t_cpe));
 	NENV = 0;
+	cpe->ppt = (char *)malloc(sizeof(char));
 	OCMD = ft_strdup("");
 	if (*env == NULL || !tmp)
 	{
@@ -54,11 +55,10 @@ t_cpe		*ft_initcpe(char **env)
 	return (cpe);
 }
 
-void		env_ch(t_cpe *cpe, int i, int j)
+void		env_ch(t_cpe *cpe, int i, int j, int o)
 {
-	int o;
+	char	*tmp;
 
-	o = 0;
 	while (ENV[o])
 	{
 		if (ft_strncmp(ENV[o], "OLDPWD=", 7) == 0)
@@ -71,8 +71,10 @@ void		env_ch(t_cpe *cpe, int i, int j)
 	}
 	if (ENV[i])
 	{
-		free(PATH);
-		PATH = ft_strsplit(get_name(ENV, "PATH=", 5), ':');
+		ft_free_arr(PATH);
+		tmp = get_name(ENV, "PATH=", 5);
+		PATH = ft_strsplit(tmp, ':');
+		free(tmp);
 	}
 	if (ENV[j])
 	{
@@ -81,7 +83,7 @@ void		env_ch(t_cpe *cpe, int i, int j)
 	}
 }
 
-int			set_cpe(t_cpe *cpe, char *cp, int ac)
+int			set_cpe(t_cpe *cpe, int ac)
 {
 	char	**av;
 	int		i;
@@ -93,43 +95,44 @@ int			set_cpe(t_cpe *cpe, char *cp, int ac)
 		i++;
 	while (ENV[j] && ft_strncmp(ENV[j], "HOME=", 5))
 		j++;
-	av = param_quote(cp);
+	av = param_quote(cpe);
+	free(cpe->line);
 	if (av[0])
 	{
 		CMD = ft_strdup(av[0]);
 		TPRM = get_tparam(av, HOME);
 		PRM = NULL;
-		env_ch(cpe, i, j);
+		env_ch(cpe, i, j, 0);
 		if (av[1])
 			PRM = get_param(av, HOME);
 	}
+	ft_free_arr(av);
 	return (valid_cmd(cpe, ac));
 }
 
 int			main(int ac, char **av, char **env)
 {
 	t_cpe	*cpe;
-	char	*line;
-	char	*prompt;
 
 	ac = 0;
 	(void)av;
-	prompt = (char *)malloc(sizeof(char));
 	cpe = ft_initcpe(env);
 	check_sign();
+	ac = 0;
 	while (42)
 	{
-		prompt = print_prompt(prompt, ac, HOME);
-		if (get_next_line(0, &line) == 0)
-			exit(0);
-		ac = set_cpe(cpe, line, ac);
+		cpe->line = (char *)malloc(sizeof(char) * ARG_MAX + 1);
+		ft_bzero(cpe->line, sizeof(cpe->line));
+		cpe->ppt = print_prompt(cpe->ppt, ac, HOME);
+		if (get_cmdl(cpe->line) == 0)
+			exit_msg(-1, "exit", cpe);
+		ac = set_cpe(cpe, ac);
 		g_ex = 0;
 		if (ac == 0)
 			ac = ex_cmd(cpe);
 		free_cpe(cpe, 1);
 	}
-	free(line);
-	free(prompt);
+	free(cpe->ppt);
 	free_cpe(cpe, 0);
 	return (0);
 }

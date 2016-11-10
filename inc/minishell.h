@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/18 22:47:01 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/09/28 21:59:17 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define PRM			cpe->prm
 # define TPRM			cpe->tprm
 # define NENV			cpe->no_env
+# define LINE			cpe->line
 
 extern int				g_ex;
 
@@ -56,6 +57,8 @@ typedef struct stat		t_stat;
 
 typedef struct			s_cpe
 {
+	char				*line;
+	char				*ppt;
 	char				*cmd;
 	char				*tcmd;
 	char				*home;
@@ -69,10 +72,11 @@ typedef struct			s_cpe
 }						t_cpe;
 
 char					*print_prompt(char *prompt, int ex, char *home);
+int						get_cmdl(char *line);
 int						get_next_line(int const fd, char **line);
 void					check_sign(void);
 char					*get_name(char **env, char *s, int len);
-char					**param_quote(char *s);
+char					**param_quote(t_cpe *cpe);
 char					*get_cdn(char *s, int m);
 char					**get_param(char **av, char *home);
 char					**get_tparam(char **av, char *home);
@@ -93,4 +97,5 @@ int						cd_err(char *path);
 int						check_pwd(t_cpe *cpe);
 int						new_pwd(t_cpe *cpe);
 void					free_cpe(t_cpe *cpe, int i);
+void					exit_msg(int i, char *s, t_cpe *cpe);
 #endif

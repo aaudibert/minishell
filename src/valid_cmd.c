@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 16:04:18 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/02 20:43:31 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/09/18 19:08:51 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,16 @@ int			err_cmd(t_cpe *cpe)
 
 int			get_cmd(t_cpe *cpe, char **path, int i, DIR *rep)
 {
+	char *tmp;
+
 	if (access(CMD, X_OK) == 0)
 		TCMD = ft_strdup(CMD);
 	else
-		TCMD = ft_strjoin(ft_strjoin(path[i], "/"), CMD);
+	{
+		tmp = ft_strjoin(path[i], "/");
+		TCMD = ft_strjoin(tmp, CMD);
+		free(tmp);
+	}
 	closedir(rep);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 16:22:56 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/08/16 17:54:13 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/09/18 19:11:17 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		check_cmd_path(t_cpe *cpe)
 		if (!ft_strncmp(CMD, PATH[i], len))
 		{
 			tmp = ft_strsub(CMD, len + 2, (ft_strlen(CMD) - len));
+			free(TCMD);
 			TCMD = ft_strdup(CMD);
 			free(CMD);
 			CMD = tmp;
@@ -53,15 +54,15 @@ int			exec_err(t_cpe *cpe)
 	int i;
 
 	i = 0;
-	if (ft_strcmp(CMD, "exit") == 0 && (PRM[1] || no_digit(PRM[0])))
+	if (!PRM)
+		exit_msg(0, "", cpe);
+	if (PRM[0] && (PRM[1] || no_digit(PRM[0])))
 	{
 		ft_putendl("exit: Expression Syntax.");
 		return (11);
 	}
 	else
 	{
-		if (!PRM[0])
-			exit(0);
 		while (PRM[0][i])
 		{
 			if (!ft_isdigit(PRM[0][i]))
@@ -71,8 +72,9 @@ int			exec_err(t_cpe *cpe)
 			}
 			i++;
 		}
-		exit(0);
+		exit_msg(ft_atoi(PRM[0]), "", cpe);
 	}
+	return (10);
 }
 
 int			check_builtins(t_cpe *cpe)
