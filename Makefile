@@ -6,14 +6,13 @@
 #    By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/04 16:20:10 by aaudiber          #+#    #+#              #
-#    Updated: 2016/09/18 19:36:26 by aaudiber         ###   ########.fr        #
+#    Updated: 2016/11/15 15:43:36 by aaudiber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRC = ./src/minishell.c\
-	  ./src/get_next_line.c\
 	  ./src/get_cmdl.c\
 	  ./src/get_name.c\
 	  ./src/param_quote.c\
@@ -22,6 +21,7 @@ SRC = ./src/minishell.c\
 	  ./src/ft_echo.c\
 	  ./src/ft_setenv.c\
 	  ./src/ft_unsetenv.c\
+	  ./src/ft_shlvl.c\
 	  ./src/free_struct.c\
 	  ./src/valid_cmd.c\
 	  ./src/ex_cmd.c\

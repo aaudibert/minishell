@@ -6,39 +6,11 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/12 16:17:50 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/06/07 20:19:02 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/11/14 17:49:01 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-char		*incr_sh(char **env, int init, int lvl)
-{
-	char	*ret;
-	char	*tmp;
-
-	tmp = get_name(env, "SHLVL=", 6);
-	while (tmp[++lvl])
-	{
-		if (!ft_isdigit(tmp[lvl]))
-		{
-			if (init == 0)
-			{
-				free(tmp);
-				return (ft_strdup("SHLVL=1"));
-			}
-			ret = ft_strjoin("SHLVL=", tmp);
-			free(tmp);
-			return (ret);
-		}
-	}
-	lvl = atoi(tmp) + 1;
-	free(tmp);
-	tmp = ft_itoa(lvl);
-	ret = ft_strjoin("SHLVL=", tmp);
-	free(tmp);
-	return (ret);
-}
 
 int			err_check(t_cpe *cpe)
 {
@@ -66,7 +38,7 @@ int			err_check(t_cpe *cpe)
 		}
 		i++;
 	}
-	return (0);
+	return (valid_env(PRM[0]));
 }
 
 int			new_env_val(t_cpe *cpe, int i)

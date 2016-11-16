@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/13 16:04:18 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/09/18 19:08:51 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/11/15 15:55:04 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int			get_cmd(t_cpe *cpe, char **path, int i, DIR *rep)
 {
 	char *tmp;
 
-	if (access(CMD, X_OK) == 0)
-		TCMD = ft_strdup(CMD);
-	else
+	if (access(TCMD, X_OK) != 0)
 	{
 		tmp = ft_strjoin(path[i], "/");
 		TCMD = ft_strjoin(tmp, CMD);
