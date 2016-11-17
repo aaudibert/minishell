@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 16:29:47 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/11/14 17:49:19 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/11/17 15:43:53 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ char					*get_cdn(char *s, int m);
 char					**get_param(char **av, char *home);
 char					**get_tparam(char **av, char *home);
 char					*incr_sh(char **env, int init, int lvl);
+char					**shlvl_pres(char **env, int init);
 int						valid_cmd(t_cpe *cpe, int ac);
 int						check_builtins(t_cpe *cpe);
 int						check_envi(t_cpe *cpe);
@@ -91,7 +92,6 @@ int						ft_setenv(t_cpe *cpe);
 int						ft_unsetenv(t_cpe *cpe);
 char					**ft_initenv(char **env, int init, t_cpe *cpe);
 void					ft_print_env(char **env);
-char					*incr_sh(char **env, int init, int lvl);
 int						valid_env(char *val);
 int						get_env(char **env, char *val);
 int						ft_chdir(t_cpe *cpe);
