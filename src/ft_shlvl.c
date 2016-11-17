@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 17:24:57 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/11/17 18:06:44 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/11/17 19:45:56 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@ int			neg_lvl(char **env)
 	tmp = get_name(env, "SHLVL=", 6);
 	while (tmp[i])
 	{
-	//trouver moyen verif si < a 0 pour return -1
-		if (!ft_isdigit(tmp[i]) && tmp[i] != '-')
+		if (!ft_isdigit(tmp[i]) && tmp[i] != '-' && i != 0)
 		{
 			free(tmp);
 			return (0);;
 		}
+		i++;
+	}
+	if (ft_atoi(tmp) > 0)
+	{
+		free(tmp);
+		return (0);
 	}
 	free(tmp);
 	return (-1);
@@ -36,7 +41,6 @@ char		**shlvl_pres(char **env, int init)
 {
 	char	**ret;
 	int		i;
-//	int		unval;
 
 	i = 0;
 	while (env[i])
@@ -45,20 +49,16 @@ char		**shlvl_pres(char **env, int init)
 			break;
 		i++;
 	}
-	if (i > arr_size(env))
+	if (i == arr_size(env))
 	{
 		ret = (char **)malloc(sizeof(char *) * (arr_size(env) + 1 + init));
 		ret[i - 1] = ft_strdup("SHLVL=1");
 	}
 	else
-		ret = (char **)malloc(sizeof(char *) * (arr_size(env) + 1 + init));
+		ret = (char **)malloc(sizeof(char *) * (arr_size(env) + 1 + init
+					+ neg_lvl(env)));
 	return (ret);
 }
-
-/*int			val_lvl(char *env)
-{
-	if (ft_strncmp(env, "SHLVL=", 6) && )
-}*/
 
 char		*incr_sh(char **env, int init, int lvl)
 {
