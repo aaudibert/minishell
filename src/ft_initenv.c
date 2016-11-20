@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 19:52:50 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/11/17 19:45:48 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/11/20 15:21:28 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ char		**ft_initenv(char **env, int init, t_cpe *cpe)
 	int		i;
 	char	**ret;
 
-	ret = shlvl_pres(env, init);
+	ret = (char **)malloc(sizeof(char *) * arr_size(env) + 1 + init);
 	i = 0;
 	while (env[i])
 	{
 		if (init == 1 || (ft_strncmp(env[i], "SHLVL=", 6) && init == 0))
 			ret[i] = ft_strdup(env[i]);
-		else if (init == 0 && neg_lvl(env) == 0)
+		else
 			ret[i] = incr_sh(env, init, 5);
 		i++;
 	}
@@ -33,7 +33,7 @@ char		**ft_initenv(char **env, int init, t_cpe *cpe)
 		ret[i] = ft_strjoin(PRM[0], "=");
 		ret[++i] = 0;
 	}
-	else
+	else if (!ret[i])
 		ret[i] = 0;
 	return (ret);
 }
