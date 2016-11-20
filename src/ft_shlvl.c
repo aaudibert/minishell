@@ -6,65 +6,11 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/11 17:24:57 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/11/20 15:05:28 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/11/20 19:04:20 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int			neg_lvl(char **env, int init)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	tmp = get_name(env, "SHLVL=", 6);
-	if (init || (int)ft_strlen(tmp) != ft_intlen(ft_atoi(tmp)))
-		return (0);
-	else
-		return (-1);
-/*	while (tmp[i])
-	{
-		if (!ft_isdigit(tmp[i]) && tmp[i] != '-' && i != 0)
-		{
-			free(tmp);
-			return (0);;
-		}
-		i++;
-	}
-	if (ft_atoi(tmp) > 0)
-	{
-		free(tmp);
-		return (0);
-	}
-	free(tmp);*/
-	return (-1);
-}
-
-char		**shlvl_pres(char **env, int init)
-{
-	char	**ret;
-	int		i;
-
-	i = 0;
-	while (env[i])
-	{
-		if (!ft_strncmp(env[i], "SHLVL=", 6))
-			break;
-		i++;
-	}
-	if (init == 0 && i == arr_size(env) && ft_strncmp(env[i - 1], "SHLVL=", 6))
-	{
-		ft_putendl("eovoev");
-		ret = (char **)malloc(sizeof(char *) * (arr_size(env) + 1 + init));
-		ret[arr_size(env)] = ft_strdup("SHLVL=1");
-		ret[arr_size(env) + 1] = 0;
-	}
-	else
-		ret = (char **)malloc(sizeof(char *) * (arr_size(env) + init
-					+ neg_lvl(env, init)));
-	return (ret);
-}
 
 char		*incr_sh(char **env, int init, int lvl)
 {
@@ -74,14 +20,13 @@ char		*incr_sh(char **env, int init, int lvl)
 	tmp = get_name(env, "SHLVL=", 6);
 	while (tmp[++lvl])
 	{
-		if (ft_isdigit(tmp[lvl]))
+		if (!ft_isdigit(tmp[lvl]))
 		{
 			if (init == 0)
 			{
 				free(tmp);
 				return (ft_strdup("SHLVL=1"));
 			}
-			ft_putendl(tmp);
 			ret = ft_strjoin("SHLVL=", tmp);
 			free(tmp);
 			return (ret);

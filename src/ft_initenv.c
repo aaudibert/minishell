@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/02 19:52:50 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/11/20 15:21:28 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/11/20 19:00:56 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char		**ft_initenv(char **env, int init, t_cpe *cpe)
 	int		i;
 	char	**ret;
 
-	ret = (char **)malloc(sizeof(char *) * arr_size(env) + 1 + init);
+	ret = (char **)malloc(sizeof(char *) * (arr_size(env) + 1 + init));
 	i = 0;
 	while (env[i])
 	{
@@ -33,7 +33,7 @@ char		**ft_initenv(char **env, int init, t_cpe *cpe)
 		ret[i] = ft_strjoin(PRM[0], "=");
 		ret[++i] = 0;
 	}
-	else if (!ret[i])
+	else
 		ret[i] = 0;
 	return (ret);
 }

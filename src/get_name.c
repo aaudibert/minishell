@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/11 16:46:15 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/11/15 15:44:14 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/11/20 19:15:45 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@ char		*ch_home(char *av, char *home)
 	{
 		if (av[i] == '~')
 			return (replace_cws(ft_strdup(av), '~', home));
-//		else if (av[i] == '$' && av[i + 1] && (tmp = get_name(env, av,
-//					(ft_strlen(av) - i - 1))) != NULL)
-///		{
-			//test verif all
-//		}
 		i++;
 	}
 	return (ft_strdup(av));

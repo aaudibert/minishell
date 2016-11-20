@@ -6,7 +6,7 @@
 /*   By: aaudiber <aaudiber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/04 18:57:48 by aaudiber          #+#    #+#             */
-/*   Updated: 2016/11/20 14:35:11 by aaudiber         ###   ########.fr       */
+/*   Updated: 2016/11/20 19:00:01 by aaudiber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_cpe		*ft_initcpe(char **env)
 	NENV = 0;
 	cpe->ppt = (char *)malloc(sizeof(char));
 	OCMD = ft_strdup("");
-	if (*env == NULL)
+	if (*env == NULL || !tmp)
 	{
 		ENV = noenv();
 		OLDPWD = NULL;
